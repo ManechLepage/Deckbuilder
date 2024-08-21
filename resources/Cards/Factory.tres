@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://dro2na7gee4sl"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/Building.gd" id="1_khbci"]
+[ext_resource type="Texture2D" uid="uid://c0wwm5j72d76e" path="res://graphics/cards/backgrounds/factory.aseprite" id="2_bcmy6"]
+
+[resource]
+script = ExtResource("1_khbci")
+health = 2
+building_sprite = Vector2i(1, 0)
+name = &"Factory"
+cost = 1
+sprite = ExtResource("2_bcmy6")
+description = "randpos
+At the beginning of your turn, creates 1 essence."

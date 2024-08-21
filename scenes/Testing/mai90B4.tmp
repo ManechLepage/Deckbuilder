@@ -1,0 +1,111 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8q6x3pmng0nx"]
+
+[ext_resource type="Texture2D" uid="uid://c8mkrsejp2xff" path="res://graphics/tiles/ground/default.aseprite" id="1_bl5rc"]
+[ext_resource type="Texture2D" uid="uid://bhkkx8ewg3leu" path="res://graphics/tiles/tokens/tokens.aseprite" id="2_2uwmq"]
+[ext_resource type="Texture2D" uid="uid://dbiv18jqnwn2w" path="res://graphics/tiles/enemy/enemy_standard.aseprite" id="3_1qusw"]
+[ext_resource type="Script" path="res://scripts/Tilemap/TileMap.gd" id="4_iggaw"]
+[ext_resource type="Script" path="res://scripts/Combat/CombatManager.gd" id="5_f5gbh"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/StartBattleButton.gd" id="5_ja3ef"]
+[ext_resource type="Script" path="res://scripts/Tokens/TokenInventory.gd" id="5_v462x"]
+[ext_resource type="Resource" uid="uid://083sj6g4ytev" path="res://resources/Tokens/big.tres" id="7_ije6g"]
+[ext_resource type="Resource" uid="uid://rsp48jmlwixu" path="res://resources/Tokens/medium.tres" id="8_v6kqr"]
+[ext_resource type="Resource" uid="uid://da1pt6fugk8se" path="res://resources/Tokens/small.tres" id="9_joyem"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbeix"]
+texture = ExtResource("1_bl5rc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pippe"]
+texture = ExtResource("2_2uwmq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+0:1/0/custom_data_0 = 2
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asbr0"]
+texture = ExtResource("3_1qusw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = -1
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7i166"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+custom_data_layer_0/name = "Token"
+custom_data_layer_0/type = 2
+sources/4 = SubResource("TileSetAtlasSource_wbeix")
+sources/5 = SubResource("TileSetAtlasSource_pippe")
+sources/6 = SubResource("TileSetAtlasSource_asbr0")
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_7i166")
+format = 2
+layer_0/name = "Ground"
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(65535, 4, 0, -1, 4, 0, 131071, 4, 0, 0, 4, 0, 65536, 4, 0, -65536, 4, 0, -2, 4, 0, 65534, 4, 0, 131070, 4, 0, -65535, 4, 0, 65537, 4, 0, 1, 4, 0, 196606, 4, 0, 196607, 4, 0, 131072, 4, 0, 131073, 4, 0, -131076, 4, 0, -65540, 4, 0, -4, 4, 0, 65532, 4, 0, 65533, 4, 0, 131069, 4, 0, 196605, 4, 0, -65539, 4, 0, -131075, 4, 0, -3, 4, 0, -65538, 4, 0, -131074, 4, 0, -65537, 4, 0, -131073, 4, 0, -196608, 4, 0, -196607, 4, 0, -131071, 4, 0, -131072, 4, 0, 131068, 4, 0, 196604, 4, 0, -131070, 4, 0, -196606, 4, 0, -65534, 4, 0, 2, 4, 0, 196610, 4, 0, 131074, 4, 0, 65538, 4, 0, 196609, 4, 0, 196608, 4, 0, 262143, 4, 0, 262141, 4, 0, 262140, 4, 0, 262142, 4, 0, -196613, 4, 0, -196612, 4, 0, -196611, 4, 0, -196610, 4, 0, -196609, 4, 0, -262144, 4, 0, -262143, 4, 0, -262142, 4, 0, -131077, 4, 0, -65541, 4, 0, -5, 4, 0, 65531, 4, 0, 131067, 4, 0, 196603, 4, 0, 262139, 4, 0)
+layer_1/name = "Cover 1"
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 1
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(131068, 6, 0, -196609, 6, 0, -262150, 6, 0)
+script = ExtResource("4_iggaw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="CombatManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_f5gbh")
+
+[node name="Inventory" type="Node" parent="."]
+
+[node name="Tokens" type="Node" parent="Inventory"]
+unique_name_in_owner = true
+script = ExtResource("5_v462x")
+tokens = Array[Resource("res://scripts/Tokens/Token.gd")]([ExtResource("7_ije6g"), ExtResource("8_v6kqr"), ExtResource("9_joyem"), ExtResource("7_ije6g")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -116.0
+offset_right = 142.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start"
+script = ExtResource("5_ja3ef")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+
+[connection signal="placing_tokens" from="CombatManager" to="Inventory/Tokens" method="_on_placing_tokens"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

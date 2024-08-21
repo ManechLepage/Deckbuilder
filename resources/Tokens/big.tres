@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Token" load_steps=4 format=3 uid="uid://083sj6g4ytev"]
+
+[ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="1_4ntbl"]
+[ext_resource type="Resource" uid="uid://cbud8xsm74ic0" path="res://resources/Movements/Close.tres" id="1_ges2i"]
+[ext_resource type="Resource" uid="uid://db7q4un0eem34" path="res://resources/Attacks/Punch.tres" id="1_pjs1k"]
+
+[resource]
+script = ExtResource("1_4ntbl")
+id = 2
+name = &"Big"
+sprite = Vector2i(0, 1)
+health = 6
+movement = ExtResource("1_ges2i")
+attack = ExtResource("1_pjs1k")

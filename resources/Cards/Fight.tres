@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://dgwgax7k48mw6"]
+
+[ext_resource type="Script" path="res://scripts/Cards/spell.gd" id="1_jh5lc"]
+[ext_resource type="Texture2D" uid="uid://cithlonbnl6g7" path="res://graphics/cards/backgrounds/fight.aseprite" id="2_4vgqe"]
+
+[resource]
+script = ExtResource("1_jh5lc")
+name = &"Fight"
+cost = 1
+sprite = ExtResource("2_4vgqe")
+description = "Target token attacks."

@@ -1,0 +1,439 @@
+[gd_scene load_steps=47 format=3 uid="uid://c8q6x3pmng0nx"]
+
+[ext_resource type="Texture2D" uid="uid://c8mkrsejp2xff" path="res://graphics/tiles/ground/default.aseprite" id="1_bl5rc"]
+[ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_sfowe"]
+[ext_resource type="Texture2D" uid="uid://blg2ba8rvwjke" path="res://graphics/tiles/buildings/buildings.aseprite" id="2_0v2bg"]
+[ext_resource type="Texture2D" uid="uid://bhkkx8ewg3leu" path="res://graphics/tiles/tokens/tokens.aseprite" id="2_2uwmq"]
+[ext_resource type="Texture2D" uid="uid://dbiv18jqnwn2w" path="res://graphics/tiles/enemy/enemy_standard.aseprite" id="3_1qusw"]
+[ext_resource type="Script" path="res://scripts/Tilemap/TileMap.gd" id="4_iggaw"]
+[ext_resource type="Script" path="res://scripts/Combat/CombatManager.gd" id="5_f5gbh"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/StartBattleButton.gd" id="5_ja3ef"]
+[ext_resource type="Script" path="res://scripts/Tokens/TokenInventory.gd" id="5_v462x"]
+[ext_resource type="Script" path="res://scripts/Enemies/EnemyManager.gd" id="7_044s7"]
+[ext_resource type="Resource" uid="uid://083sj6g4ytev" path="res://resources/Tokens/big.tres" id="7_ije6g"]
+[ext_resource type="Resource" uid="uid://dkgfls00lg17p" path="res://resources/Enemies/Basic.tres" id="8_nbnuu"]
+[ext_resource type="Resource" uid="uid://rsp48jmlwixu" path="res://resources/Tokens/medium.tres" id="8_v6kqr"]
+[ext_resource type="Script" path="res://scripts/Selection/SelectionManager.gd" id="9_d3y2r"]
+[ext_resource type="Resource" uid="uid://da1pt6fugk8se" path="res://resources/Tokens/small.tres" id="9_joyem"]
+[ext_resource type="Script" path="res://scripts/Combat/RollManager.gd" id="10_biw57"]
+[ext_resource type="Script" path="res://scripts/Buildings/BuildingManager.gd" id="10_bp4um"]
+[ext_resource type="Script" path="res://scripts/Combat/EssenceManager.gd" id="11_d6jka"]
+[ext_resource type="Script" path="res://scripts/Health/HealthManager.gd" id="13_7sb8f"]
+[ext_resource type="PackedScene" uid="uid://bqnrfrlkcmgqh" path="res://scenes/UI/health.tscn" id="13_ixdpm"]
+[ext_resource type="Script" path="res://scripts/Cards/CardManager.gd" id="16_3ncu0"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/TopButton.gd" id="19_5vo3e"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/Phase.gd" id="19_ak35g"]
+[ext_resource type="Resource" uid="uid://br1b6psejuo83" path="res://resources/Cards/HomePoint.tres" id="20_tl8gv"]
+[ext_resource type="Texture2D" uid="uid://b0imspfnxv1ii" path="res://graphics/energy/bar.aseprite" id="21_p3m75"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/EnergyBar.gd" id="21_si6xu"]
+[ext_resource type="Texture2D" uid="uid://b0l5bimdqfsxx" path="res://graphics/energy/energy_point.aseprite" id="22_gmerp"]
+[ext_resource type="Resource" uid="uid://dgwgax7k48mw6" path="res://resources/Cards/Fight.tres" id="22_y3p1o"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/DrawPile.gd" id="28_pa4gw"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/Discard.gd" id="30_bh0kq"]
+[ext_resource type="Texture2D" uid="uid://wgk7p7hdeg1x" path="res://graphics/cards/deck.aseprite" id="31_juuhc"]
+[ext_resource type="Texture2D" uid="uid://chreydw1dvwrj" path="res://graphics/cards/discard.aseprite" id="32_oalup"]
+[ext_resource type="Script" path="res://scripts/Cards/CardActions.gd" id="33_0knp2"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/SecondStrike.gd" id="33_d6mmd"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/Regeneration.gd" id="34_4l7ii"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/Fight.gd" id="35_q7vey"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/Bomb.gd" id="36_1qbwv"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/Factory.gd" id="40_s783m"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/MilitaryCamp.gd" id="41_1com6"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/HomePoint.gd" id="42_wfycr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrmtx"]
+texture = ExtResource("1_sfowe")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_byvwr"]
+texture = ExtResource("2_0v2bg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbeix"]
+texture = ExtResource("1_bl5rc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pippe"]
+texture = ExtResource("2_2uwmq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+0:1/0/custom_data_0 = 2
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asbr0"]
+texture = ExtResource("3_1qusw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = -1
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7i166"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+custom_data_layer_0/name = "Token"
+custom_data_layer_0/type = 2
+sources/4 = SubResource("TileSetAtlasSource_wbeix")
+sources/5 = SubResource("TileSetAtlasSource_pippe")
+sources/6 = SubResource("TileSetAtlasSource_asbr0")
+sources/0 = SubResource("TileSetAtlasSource_wrmtx")
+sources/2 = SubResource("TileSetAtlasSource_byvwr")
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_7i166")
+format = 2
+layer_0/name = "Ground"
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(65535, 4, 0, -1, 4, 0, 131071, 4, 0, 0, 4, 0, 65536, 4, 0, -65536, 4, 0, -2, 4, 0, 65534, 4, 0, 131070, 4, 0, -65535, 4, 0, 65537, 4, 0, 1, 4, 0, 196606, 4, 0, 196607, 4, 0, 131072, 4, 0, 131073, 4, 0, -131076, 4, 0, -65540, 4, 0, -4, 4, 0, 65532, 4, 0, 65533, 4, 0, 131069, 4, 0, 196605, 4, 0, -65539, 4, 0, -131075, 4, 0, -3, 4, 0, -65538, 4, 0, -131074, 4, 0, -65537, 4, 0, -131073, 4, 0, -196608, 4, 0, -196607, 4, 0, -131071, 4, 0, -131072, 4, 0, 131068, 4, 0, 196604, 4, 0, -131070, 4, 0, -196606, 4, 0, -65534, 4, 0, 2, 4, 0, 196610, 4, 0, 131074, 4, 0, 65538, 4, 0, 196609, 4, 0, 196608, 4, 0, 262143, 4, 0, 262141, 4, 0, 262140, 4, 0, 262142, 4, 0, -196613, 4, 0, -196612, 4, 0, -196611, 4, 0, -196610, 4, 0, -196609, 4, 0, -262144, 4, 0, -262143, 4, 0, -262142, 4, 0, -131077, 4, 0, -65541, 4, 0, -5, 4, 0, 65531, 4, 0, 131067, 4, 0, 196603, 4, 0, 262139, 4, 0)
+layer_1/name = "Cover 1"
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 1
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "GroundIndicator"
+layer_2/y_sort_enabled = true
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Cover1Indicator"
+layer_3/y_sort_enabled = true
+layer_3/z_index = 2
+layer_3/tile_data = PackedInt32Array()
+script = ExtResource("4_iggaw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 22)
+zoom = Vector2(3, 3)
+
+[node name="CombatManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_f5gbh")
+
+[node name="SelectionManager" type="Node" parent="." groups=["SelectionManager"]]
+unique_name_in_owner = true
+script = ExtResource("9_d3y2r")
+
+[node name="EnemyManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_044s7")
+testing_enemies = Array[Resource("res://scripts/Enemies/Enemy.gd")]([ExtResource("8_nbnuu"), ExtResource("8_nbnuu"), ExtResource("8_nbnuu")])
+
+[node name="BuildingManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_bp4um")
+
+[node name="RollManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_biw57")
+
+[node name="EssenceManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_d6jka")
+
+[node name="Inventory" type="Node" parent="."]
+
+[node name="Tokens" type="Node" parent="Inventory"]
+unique_name_in_owner = true
+script = ExtResource("5_v462x")
+tokens = Array[Resource("res://scripts/Tokens/Token.gd")]([ExtResource("7_ije6g"), ExtResource("8_v6kqr"), ExtResource("9_joyem"), ExtResource("7_ije6g")])
+
+[node name="Cards" type="Node" parent="Inventory"]
+unique_name_in_owner = true
+script = ExtResource("16_3ncu0")
+testing_deck = Array[Resource("res://scripts/Cards/card.gd")]([ExtResource("22_y3p1o"), ExtResource("22_y3p1o"), ExtResource("22_y3p1o"), ExtResource("20_tl8gv"), ExtResource("20_tl8gv"), ExtResource("20_tl8gv")])
+
+[node name="Healths" type="Control" parent="."]
+unique_name_in_owner = true
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_7sb8f")
+health_label = ExtResource("13_ixdpm")
+offset = Vector2(-5, 15)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["Canvas"]]
+unique_name_in_owner = true
+
+[node name="BottomButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -184.0
+offset_top = -94.0
+offset_right = -16.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 49
+text = "Start"
+script = ExtResource("5_ja3ef")
+
+[node name="TopButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 19.0
+offset_right = -25.0
+offset_bottom = 89.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 41
+text = "Attack"
+script = ExtResource("19_5vo3e")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+
+[node name="Phase" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+texture_filter = 1
+offset_right = 144.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 21
+text = "Current Phase"
+script = ExtResource("19_ak35g")
+
+[node name="EnergyBar" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -207.0
+offset_right = -51.0
+offset_bottom = 93.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("21_si6xu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EnergyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/EnergyBar/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("22_gmerp")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/EnergyBar/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("22_gmerp")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/EnergyBar/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("22_gmerp")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/EnergyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_p3m75")
+
+[node name="Label" type="Label" parent="CanvasLayer/EnergyBar"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -11.0
+offset_right = 43.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 56
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawPile" type="Control" parent="CanvasLayer"]
+texture_filter = 1
+layout_mode = 3
+anchor_top = 0.704
+anchor_right = 0.111
+anchor_bottom = 1.0
+offset_top = -0.192047
+offset_right = 0.127991
+grow_vertical = 0
+script = ExtResource("28_pa4gw")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/DrawPile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_juuhc")
+
+[node name="DeckCount" type="Label" parent="CanvasLayer/DrawPile"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -12.0
+offset_bottom = 75.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Discard" type="Control" parent="CanvasLayer"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = 99.0
+offset_right = 70.0
+offset_bottom = 143.0
+grow_vertical = 2
+script = ExtResource("30_bh0kq")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Discard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_oalup")
+
+[node name="DiscardCount" type="Label" parent="CanvasLayer/Discard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+text = "10
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hand" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_top = -148.0
+offset_right = 364.0
+offset_bottom = 55.9991
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -30
+alignment = 1
+
+[node name="CardActions" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("33_0knp2")
+
+[node name="Regeneration" type="Node" parent="CardActions"]
+script = ExtResource("34_4l7ii")
+card_name = &"Regeneration"
+
+[node name="Fight" type="Node" parent="CardActions"]
+script = ExtResource("35_q7vey")
+card_name = &"Fight"
+
+[node name="SecondStrike" type="Node" parent="CardActions"]
+script = ExtResource("33_d6mmd")
+card_name = &"Second Strike"
+
+[node name="Bomb" type="Node" parent="CardActions"]
+script = ExtResource("36_1qbwv")
+card_name = &"Bomb"
+
+[node name="Factory" type="Node" parent="CardActions"]
+script = ExtResource("40_s783m")
+card_name = &"Factory"
+
+[node name="MilitaryCamp" type="Node" parent="CardActions"]
+script = ExtResource("41_1com6")
+card_name = &"Military Camp"
+
+[node name="HomePoint" type="Node" parent="CardActions"]
+script = ExtResource("42_wfycr")
+card_name = &"Home Point"
+
+[connection signal="placing_tokens" from="CombatManager" to="EnemyManager" method="_on_combat_manager_placing_tokens"]
+[connection signal="placing_tokens" from="CombatManager" to="Inventory/Tokens" method="_on_placing_tokens"]
+[connection signal="start_player_turn" from="CombatManager" to="BuildingManager" method="start_player_turn"]
+[connection signal="start_player_turn" from="CombatManager" to="CanvasLayer/BottomButton" method="_on_combat_manager_start_player_turn"]
+[connection signal="pressed" from="CanvasLayer/BottomButton" to="CanvasLayer/BottomButton" method="_on_pressed"]
+[connection signal="attacked" from="CanvasLayer/TopButton" to="SelectionManager" method="top_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TopButton" to="CanvasLayer/TopButton" method="_on_pressed"]
+[connection signal="gui_input" from="CanvasLayer/DrawPile/TextureRect" to="CanvasLayer/DrawPile" method="_on_texture_rect_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Discard/TextureRect" to="CanvasLayer/Discard" method="_on_texture_rect_gui_input"]

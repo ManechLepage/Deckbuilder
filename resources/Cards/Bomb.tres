@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://cnaxaegem2byl"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/Building.gd" id="1_41764"]
+[ext_resource type="Texture2D" uid="uid://dk7v2jw3bqjrr" path="res://graphics/cards/backgrounds/bomb.aseprite" id="2_geb4h"]
+
+[resource]
+script = ExtResource("1_41764")
+health = 1
+name = &"Bomb"
+cost = 1
+sprite = ExtResource("2_geb4h")
+description = "When this building dies, creates an explosion around that deals 5 explosion damage."

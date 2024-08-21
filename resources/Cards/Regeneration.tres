@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://dx18q5pxqws8t"]
+
+[ext_resource type="Script" path="res://scripts/Cards/spell.gd" id="1_6ax43"]
+[ext_resource type="Texture2D" uid="uid://7iv1d8sog6ep" path="res://graphics/cards/backgrounds/regeneration.aseprite" id="2_d4ynl"]
+
+[resource]
+script = ExtResource("1_6ax43")
+name = &"Regeneration"
+cost = 1
+sprite = ExtResource("2_d4ynl")
+description = "5 lives are randomly distributed between your tokens."

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://br1b6psejuo83"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/Building.gd" id="1_4i8fd"]
+[ext_resource type="Texture2D" uid="uid://bpp8h22ib10dx" path="res://graphics/cards/backgrounds/homepoint.aseprite" id="2_e3l38"]
+
+[resource]
+script = ExtResource("1_4i8fd")
+health = 3
+building_sprite = Vector2i(3, 0)
+name = &"Home Point"
+cost = 1
+sprite = ExtResource("2_e3l38")
+description = "randpos
+Once per turn: Teleport token next to this building."

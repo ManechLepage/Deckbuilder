@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://rf8oh18sq3a4"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/Building.gd" id="1_gyr4k"]
+[ext_resource type="Texture2D" uid="uid://bhea7xiil6ie0" path="res://graphics/cards/backgrounds/military_camp.aseprite" id="2_3tkm0"]
+
+[resource]
+script = ExtResource("1_gyr4k")
+health = 4
+building_sprite = Vector2i(2, 0)
+name = &"Military Camp"
+cost = 2
+sprite = ExtResource("2_3tkm0")
+description = "Tokens next to this building deals double damage."

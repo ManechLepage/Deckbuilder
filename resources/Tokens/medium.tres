@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Token" load_steps=4 format=3 uid="uid://rsp48jmlwixu"]
+
+[ext_resource type="Resource" uid="uid://bo4s5x3dy63jr" path="res://resources/Attacks/MediumExplosion.tres" id="1_75sec"]
+[ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="1_fabcj"]
+[ext_resource type="Resource" uid="uid://jx6wlytl76h" path="res://resources/Movements/ShortRange.tres" id="1_oa3lo"]
+
+[resource]
+script = ExtResource("1_fabcj")
+id = 1
+name = &"Medium"
+sprite = Vector2i(1, 0)
+health = 4
+movement = ExtResource("1_oa3lo")
+attack = ExtResource("1_75sec")

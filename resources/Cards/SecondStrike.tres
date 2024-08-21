@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://c2i7t36ty6yji"]
+
+[ext_resource type="Script" path="res://scripts/Cards/spell.gd" id="1_l8dry"]
+[ext_resource type="Texture2D" uid="uid://1rpo8phvryjk" path="res://graphics/cards/backgrounds/second_strike.aseprite" id="2_ldc8r"]
+
+[resource]
+script = ExtResource("1_l8dry")
+name = &"Second Strike"
+cost = 0
+sprite = ExtResource("2_ldc8r")
+description = "Target token attacks. +2 damage on the attacks.
+   Can only be played if the token already attacks this turn.
+"
