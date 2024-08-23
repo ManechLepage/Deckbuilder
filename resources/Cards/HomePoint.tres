@@ -7,6 +7,7 @@
 script = ExtResource("1_4i8fd")
 health = 3
 building_sprite = Vector2i(3, 0)
+ability_usage_per_turn = 1
 name = &"Home Point"
 cost = 1
 sprite = ExtResource("2_e3l38")

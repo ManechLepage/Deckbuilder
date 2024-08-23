@@ -18,7 +18,7 @@ func update_token(token: Token):
 		token_health = label
 	
 	token_health.set_health(token.health)
-	token_health.position = tile_map.map_to_local(token.position) + offset
+	token_health.position = tile_map.ground.map_to_local(token.position) + offset
 
 func update_enemy(enemy: Enemy):
 	var enemy_health = enemy_healths.get(enemy)
@@ -29,7 +29,7 @@ func update_enemy(enemy: Enemy):
 		enemy_health = label
 	
 	enemy_health.set_health(enemy.health)
-	enemy_health.position = tile_map.map_to_local(enemy.position) + offset
+	enemy_health.position = tile_map.ground.map_to_local(enemy.position) + offset
 
 func update_building_health(building: Building):
 	var building_health = building_healths.get(building)
@@ -40,7 +40,7 @@ func update_building_health(building: Building):
 		building_health = label
 	
 	building_health.set_health(building.health)
-	building_health.position = tile_map.map_to_local(building.position) + offset
+	building_health.position = tile_map.ground.map_to_local(building.position) + offset
 
 func destroy_enemy_health(enemy: Enemy):
 	enemy_healths.get(enemy).queue_free()

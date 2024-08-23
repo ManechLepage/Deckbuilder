@@ -7,15 +7,26 @@ extends Node
 var buildings: Array[Building]
 
 func create_building(card: Building, position: Vector2i):
-	buildings.append(card.duplicate(true))
-	tile_map.place_building(card, position)
+	print(position)
+	var building: Building = card.duplicate(true)
+	buildings.append(building)
+	tile_map.place_building(building, position)
 
 func remove_building(building: Building):
 	cards.get_card_action(building).on_death()
-	tile_map.erase_cell(1, building.position)
+	tile_map.ground.erase_cell(building.position)
 	healths.destroy_building_health(building)
 	buildings.erase(building)
+
+func activate_ability(building: Building):
+	if building.can_use_ability():
+		cards.get_card_action(building).ability()
 
 func start_player_turn():
 	for building in buildings:
 		cards.get_card_action(building).on_start_of_player_turn()
+		building.current_ability_usage = 0
+
+func update_building_position(building: Building):
+	print(building.position, "---")
+	cards.get_card_action(building).position = building.position

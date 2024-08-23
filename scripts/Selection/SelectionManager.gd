@@ -10,6 +10,7 @@ extends Node
 @onready var cards = %Cards
 @onready var essence_manager = %EssenceManager
 @onready var card_actions = %CardActions
+@onready var building_manager = %BuildingManager
 
 var selected_token: Token
 var selected_tile: Vector2i
@@ -30,7 +31,8 @@ enum WaitingSelection {
 	Enemy = 2,
 	Tile = 3,
 	TokenAndTile = 4,
-	Card = 5
+	Card = 5,
+	Building = 6
 }
 
 enum TileSelectionType {
@@ -41,7 +43,7 @@ enum TileSelectionType {
 }
 
 var current_tile_selection_type: TileSelectionType = TileSelectionType.Attack
-var current_selection_type: WaitingSelection = WaitingSelection.None
+var current_selection_type: WaitingSelection = WaitingSelection.All
 
 #func _process(delta):
 	#print(is_in_hand)
@@ -51,6 +53,7 @@ func _input(event):
 		check_for_token()
 		check_for_tile()
 		check_for_card()
+		check_for_building()
 
 func check_for_token():
 	if current_selection_type == WaitingSelection.Token or current_selection_type == WaitingSelection.TokenAndTile or current_selection_type == WaitingSelection.All:
@@ -74,6 +77,13 @@ func check_for_card():
 			essence_manager.add_essence(-selected_card.cost)
 			cards.visualize_card(focused_card)
 			is_playing_card = true
+
+func check_for_building():
+	if current_selection_type == WaitingSelection.All or current_selection_type == WaitingSelection.Building:
+		var tile = tile_map.get_tile_from_mouse_position()
+		for building: Building in building_manager.buildings:
+			if building.position == tile:
+				building_manager.activate_ability(building)
 
 func token_selectable(selectable_tokens: Array[Token]):
 	clear_selections()
@@ -105,7 +115,7 @@ func update_selectable_tiles(_selectable_tiles: Array[Vector2i], sprite: Vector2
 
 func clear_selections():
 	disable_confirmation()
-	current_selection_type = WaitingSelection.None
+	current_selection_type = WaitingSelection.All
 	selected_token = null
 	tile_map.clear_cover_selections()
 	tile_map.clear_ground_indicators()
@@ -194,7 +204,7 @@ func unfocus_card(card: Control):
 func resolved(played_card: Control):
 	played_card.remove_from_play()
 	selected_card = null
-	current_selection_type = WaitingSelection.Token
+	current_selection_type = WaitingSelection.All
 
 func _on_hand_mouse_entered():
 	is_in_hand = true

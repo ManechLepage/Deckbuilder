@@ -3,6 +3,8 @@ extends Node
 
 var parent: CardActions
 var current_card: Card
+var position: Vector2i
+
 @export var card_name: StringName
 
 func _ready():

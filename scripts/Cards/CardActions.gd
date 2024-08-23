@@ -53,6 +53,12 @@ func select_open_tile():
 	await selected
 	return selection_manager.selected_tile
 
+func make_tiles_selectable(tiles: Array[Vector2i]):
+	combat_manager.current_combat_phase = combat_manager.CombatPhase.Awaiting
+	selection_manager.current_selection_type = selection_manager.WaitingSelection.Tile
+	selection_manager.update_selectable_tiles(tiles, Vector2i(0, 1))
+	await selected
+	return selection_manager.selected_tile
 
 func get_random_open_space():
 	var tiles: Array[Vector2i] = tile_map.get_ground_tiles()
@@ -69,7 +75,11 @@ func get_neighbouring_tiles(position: Vector2i):
 	tiles.append(position + Vector2i(0, -1))
 	tiles.append(position + Vector2i(1, 0))
 	tiles.append(position + Vector2i(-1, 0))
-	return tiles
+	var filtered_tiles: Array[Vector2i]
+	for tile in tiles:
+		if tile_map.has_ground(tile):
+			filtered_tiles.append(tile)
+	return filtered_tiles
 
 func get_tiles_from_range(range: int, position: Vector2i):
 	var tiles: Array[Vector2i]
@@ -89,10 +99,8 @@ func get_neighbouring_tokens(position: Vector2i):
 
 func place_building(building: Building, position: Vector2i):
 	building_manager.create_building(building, position)
+	combat_manager.update_buildings()
 
-func make_tiles_selectable(tiles: Array[Vector2i]):
-	print("Ability used")
-	await selected
 
 func basic_attack(token: Token):
 	selection_manager.attack_token(token)

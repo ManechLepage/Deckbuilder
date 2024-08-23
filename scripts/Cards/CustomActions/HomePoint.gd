@@ -8,6 +8,6 @@ func play(card: CardDisplay):
 
 func ability():
 	var token: Token = await parent.select_any_token()
-	var tiles = parent.get_neighbouring_tiles(current_card.position)
+	var tiles = parent.get_neighbouring_tiles(position)
 	var tile = await parent.make_tiles_selectable(tiles)
 	parent.teleport_token(token, tile)
