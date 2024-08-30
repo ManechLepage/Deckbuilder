@@ -1,7 +1,6 @@
 class_name Movement
 extends Resource
 
-var relative_positions: Array[Vector2i]
 @export var relative_directions: Array[Vector2i]
 @export var distance: int
 
@@ -13,16 +12,17 @@ var relative_neighbours = [
 ]
 
 var visited_nodes: Array[Vector2i]
-var grid: Array[Array]
+var obstacles: Array[Vector2i]
 
-func calculate_relative_positions(_grid: Array[Array], position: Vector2i):
+func calculate_relative_positions(_obstables: Array[Vector2i], position: Vector2i):
 	visited_nodes.clear()
-	grid = _grid
+	obstacles = _obstables
 	find_range(position, distance, 0)
+	return visited_nodes
 
 func find_range(position: Vector2i, max_range:int, current_range:int):
 	visited_nodes.append(position)
 	if current_range < max_range:
 		for i in relative_neighbours:
-			if grid[i.x][i.y] == 0:
+			if position + i not in obstacles:
 				find_range(position + i, max_range, current_range + 1)

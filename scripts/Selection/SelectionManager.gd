@@ -24,6 +24,8 @@ var can_confirm_action: bool = false
 
 var is_playing_card: bool = false
 
+var is_for_movement: bool = false
+
 enum WaitingSelection {
 	None = -1,
 	All = 0,
@@ -42,13 +44,14 @@ enum TileSelectionType {
 	Building = 2
 }
 
-var current_tile_selection_type: TileSelectionType = TileSelectionType.Attack
-var current_selection_type: WaitingSelection = WaitingSelection.All
+var current_tile_selection_type: TileSelectionType = TileSelectionType.None
+var current_selection_type: WaitingSelection = WaitingSelection.None
 
 #func _process(delta):
 	#print(is_in_hand)
 
 func _input(event):
+	print(current_selection_type)
 	if Input.is_action_just_pressed("left_click"):
 		check_for_token()
 		check_for_tile()
@@ -56,19 +59,37 @@ func _input(event):
 		check_for_building()
 
 func check_for_token():
-	if current_selection_type == WaitingSelection.Token or current_selection_type == WaitingSelection.TokenAndTile or current_selection_type == WaitingSelection.All:
-		if tile_map.can_select(tile_map.get_tile_from_mouse_position()):
-			selected_token = tokens.get_combat_token_at_position(tile_map.get_tile_from_mouse_position())
-			card_actions.selected.emit()
-			tile_map.clear_cover_selections()
+	if tile_map.can_select_for_movement(tile_map.get_tile_from_mouse_position()):
+		var previous_token: Token = selected_token
+		selected_token = tokens.get_combat_token_at_position(tile_map.get_tile_from_mouse_position())
+		if current_selection_type == WaitingSelection.Token or current_selection_type == WaitingSelection.TokenAndTile or current_selection_type == WaitingSelection.All:
+			if tile_map.can_select(tile_map.get_tile_from_mouse_position()):
+				card_actions.selected.emit()
+		else:
+			if not selected_token.has_moved:
+				is_for_movement = true
+				if previous_token == selected_token:
+					is_for_movement = false
+					clear_selected_token()
+				else:
+					selectable_tiles = calculate_selectable_cells(selected_token.movement, tile_map.get_tile_from_mouse_position(), true)
+					update_selectable_tiles(selectable_tiles, Vector2i(0, 0))
+		tile_map.clear_cover_selections()
+		current_selection_type = WaitingSelection.Tile
 
 func check_for_tile():
 	if current_selection_type == WaitingSelection.Tile or current_selection_type == WaitingSelection.TokenAndTile or current_selection_type == WaitingSelection.All:
 		var tile = tile_map.get_tile_from_mouse_position()
 		if  tile in selectable_tiles:
+			if is_for_movement:
+				is_for_movement = false
+				tile_map.move_token(selected_token, tile)
+				clear_selected_token()
+			else:
+				update_selected_tile(selectable_tiles, tile)
+				enable_confirmation()
 			tile_map.clear_cover_selections()
-			update_selected_tile(selectable_tiles, tile)
-			enable_confirmation()
+			current_selection_type = WaitingSelection.None
 
 func check_for_card():
 	if focused_card and is_in_hand:
@@ -158,9 +179,7 @@ func disable_confirmation():
 func calculate_selectable_cells(token_movement: Movement, position: Vector2i, filter_covers: bool):
 	var tiles: Array[Vector2i]
 	
-	for relative_position in token_movement.relative_positions:
-		tiles.append(position + relative_position)
-	
+	tiles.append_array(token_movement.calculate_relative_positions(tile_map.get_obstacles(), position))
 	
 	for relative_direction in token_movement.relative_directions:
 		tiles.append_array(get_next_in_line(relative_direction, position))

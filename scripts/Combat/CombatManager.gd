@@ -41,9 +41,7 @@ func place():
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("left_click"):
-		if current_combat_phase == CombatPhase.PlayerTurn:
-			handle_click_in_player_turn()
-		elif current_combat_phase == CombatPhase.EnemyTurn:
+		if current_combat_phase == CombatPhase.EnemyTurn:
 			handle_click_in_enemy_turn()
 		update_tokens()
 		update_enemies()
@@ -57,22 +55,6 @@ func handle_click_in_placing_tokens():
 			update_placing_label()
 			if tokens_left < 0:
 				player_turn()
-
-func handle_click_in_player_turn():
-	var token: Token = tokens.get_combat_token_at_position(tile_map.get_tile_from_mouse_position())
-	if token:
-		if not token.has_moved:
-			if token == selection_manager.selected_token:
-				selection_manager.clear_selected_token()
-			else:
-				selection_manager.selected_token = token
-				selection_manager.selectable_tiles = selection_manager.calculate_selectable_cells(selection_manager.selected_token.movement, tile_map.get_tile_from_mouse_position(), true)
-				selection_manager.update_selectable_tiles(selection_manager.selectable_tiles, Vector2i(0, 0))
-	else:
-		var position = tile_map.get_tile_from_mouse_position()
-		if position in selection_manager.selectable_tiles:
-			tile_map.move_token(selection_manager.selected_token, position)
-		selection_manager.clear_selected_token()
 
 func handle_click_in_enemy_turn():
 	place()
@@ -116,7 +98,7 @@ func attack(token: Token, target: Vector2i):
 	current_combat_phase = CombatPhase.PlayerTurn
 	phase.update_label()
 	if token.attack.choose:
-		if len(token.attack.area.relative_positions) > 0:
+		if token.attack.area.distance > 0:
 			deal_damage_to_tile(target, token.attack.damage)
 		else:
 			var direction: Vector2i = target - token.position

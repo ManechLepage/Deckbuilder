@@ -80,8 +80,19 @@ func clear_cover_selections():
 	for cell in cover_1_indicator.get_used_cells():
 		cover_1_indicator.erase_cell(cell)
 
+func can_select_for_movement(position: Vector2i):
+	if position in cover_1.get_used_cells():
+		return true
+	else:
+		return false
+
 func can_select(position: Vector2i):
 	if position in cover_1_indicator.get_used_cells():
 		return true
 	else:
 		return false
+
+func get_obstacles():
+	var obstacles: Array[Vector2i]
+	obstacles.append_array(cover_1.get_used_cells())
+	return obstacles
