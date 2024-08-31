@@ -3,7 +3,6 @@ extends Node
 @onready var tile_map = %TileMap
 @onready var enemy_manager = %EnemyManager
 @onready var tokens = %Tokens
-@onready var label = $"../CanvasLayer/Label"
 @onready var combat_manager = %CombatManager
 @onready var top_button = %TopButton
 @onready var hand = $"../CanvasLayer/Hand"
@@ -21,9 +20,7 @@ var played_card: Control
 
 var is_in_hand: bool = false
 var can_confirm_action: bool = false
-
 var is_playing_card: bool = false
-
 var is_for_movement: bool = false
 
 enum WaitingSelection {
@@ -47,16 +44,19 @@ enum TileSelectionType {
 var current_tile_selection_type: TileSelectionType = TileSelectionType.None
 var current_selection_type: WaitingSelection = WaitingSelection.None
 
+signal changed_action_type
+
 #func _process(delta):
 	#print(is_in_hand)
 
 func _input(event):
-	print(current_selection_type)
+	#print(current_selection_type)
 	if Input.is_action_just_pressed("left_click"):
 		check_for_token()
 		check_for_tile()
 		check_for_card()
 		check_for_building()
+	changed_action_type.emit()
 
 func check_for_token():
 	if tile_map.can_select_for_movement(tile_map.get_tile_from_mouse_position()):
@@ -85,11 +85,11 @@ func check_for_tile():
 				is_for_movement = false
 				tile_map.move_token(selected_token, tile)
 				clear_selected_token()
+				current_selection_type = WaitingSelection.None
 			else:
 				update_selected_tile(selectable_tiles, tile)
 				enable_confirmation()
 			tile_map.clear_cover_selections()
-			current_selection_type = WaitingSelection.None
 
 func check_for_card():
 	if focused_card and is_in_hand:
@@ -109,7 +109,6 @@ func check_for_building():
 func token_selectable(selectable_tokens: Array[Token]):
 	clear_selections()
 	current_selection_type = WaitingSelection.Token
-	label.text = "Select a token"
 	for token in tokens.combat_tokens:
 		if token in selectable_tokens:
 			tile_map.make_token_selectable(token)
@@ -136,7 +135,7 @@ func update_selectable_tiles(_selectable_tiles: Array[Vector2i], sprite: Vector2
 
 func clear_selections():
 	disable_confirmation()
-	current_selection_type = WaitingSelection.All
+	current_selection_type = WaitingSelection.None
 	selected_token = null
 	tile_map.clear_cover_selections()
 	tile_map.clear_ground_indicators()
@@ -150,7 +149,11 @@ func all_enemies_selectable():
 	pass
 
 func show_attacked_tiles(token: Token):
-	selectable_tiles = calculate_selectable_cells(token.attack.area, token.position, false)
+	if token.attack.choose:
+		selectable_tiles = calculate_selectable_cells(token.attack.area, token.position, false)
+	else:
+		pass
+		selectable_tiles = calculate_no_choosing_selectable_cells(token.attack.area, token.position)
 	update_selectable_tiles(selectable_tiles, Vector2i(0, 1))
 
 func top_button_pressed():
@@ -185,6 +188,14 @@ func calculate_selectable_cells(token_movement: Movement, position: Vector2i, fi
 		tiles.append_array(get_next_in_line(relative_direction, position))
 	
 	return filter_tiles(tiles, filter_covers)
+
+func calculate_no_choosing_selectable_cells(token_movement: Movement, position: Vector2i):
+	var tiles: Array[Vector2i]
+	
+	for pos in token_movement.relative_positions:
+		tiles.append(position + pos)
+	
+	return filter_tiles(tiles, false)
 
 func get_next_in_line(relative_direction: Vector2i, initial_position: Vector2i):
 	var last_position: Vector2i = initial_position
@@ -223,7 +234,7 @@ func unfocus_card(card: Control):
 func resolved(played_card: Control):
 	played_card.remove_from_play()
 	selected_card = null
-	current_selection_type = WaitingSelection.All
+	current_selection_type = WaitingSelection.None
 
 func _on_hand_mouse_entered():
 	is_in_hand = true

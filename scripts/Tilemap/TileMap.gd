@@ -81,8 +81,9 @@ func clear_cover_selections():
 		cover_1_indicator.erase_cell(cell)
 
 func can_select_for_movement(position: Vector2i):
-	if position in cover_1.get_used_cells():
-		return true
+	if get_tile_content(position):
+		if get_tile_content(position) > -1:
+			return true
 	else:
 		return false
 

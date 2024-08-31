@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=51 format=4 uid="uid://c8q6x3pmng0nx"]
 
 [ext_resource type="Texture2D" uid="uid://c8mkrsejp2xff" path="res://graphics/tiles/ground/default.aseprite" id="1_bl5rc"]
 [ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_sfowe"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://scripts/UI/Combat/EnergyBar.gd" id="21_si6xu"]
 [ext_resource type="Texture2D" uid="uid://b0l5bimdqfsxx" path="res://graphics/energy/energy_point.aseprite" id="22_gmerp"]
 [ext_resource type="Resource" uid="uid://dgwgax7k48mw6" path="res://resources/Cards/Fight.tres" id="22_y3p1o"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/InfoLabel.gd" id="28_51rc0"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/DrawPile.gd" id="28_pa4gw"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/Discard.gd" id="30_bh0kq"]
 [ext_resource type="Texture2D" uid="uid://wgk7p7hdeg1x" path="res://graphics/cards/deck.aseprite" id="31_juuhc"]
@@ -85,6 +86,7 @@ texture = ExtResource("2_2uwmq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = 3
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, -8)
 0:1/0/custom_data_0 = 2
@@ -238,7 +240,8 @@ theme_override_font_sizes/font_size = 41
 text = "Attack"
 script = ExtResource("19_5vo3e")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -247,6 +250,7 @@ offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
+script = ExtResource("28_51rc0")
 
 [node name="Phase" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -447,6 +451,7 @@ card_name = &"Home Point"
 [connection signal="placing_tokens" from="CombatManager" to="Inventory/Tokens" method="_on_placing_tokens"]
 [connection signal="start_player_turn" from="CombatManager" to="BuildingManager" method="start_player_turn"]
 [connection signal="start_player_turn" from="CombatManager" to="CanvasLayer/BottomButton" method="_on_combat_manager_start_player_turn"]
+[connection signal="changed_action_type" from="SelectionManager" to="CanvasLayer/InfoLabel" method="changed_action_type"]
 [connection signal="pressed" from="CanvasLayer/BottomButton" to="CanvasLayer/BottomButton" method="_on_pressed"]
 [connection signal="attacked" from="CanvasLayer/TopButton" to="SelectionManager" method="top_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TopButton" to="CanvasLayer/TopButton" method="_on_pressed"]

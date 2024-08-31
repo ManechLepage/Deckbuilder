@@ -3,6 +3,7 @@ extends Resource
 
 @export var relative_directions: Array[Vector2i]
 @export var distance: int
+@export var relative_positions: Array[Vector2i]
 
 var relative_neighbours = [
 	Vector2i(0, 1),

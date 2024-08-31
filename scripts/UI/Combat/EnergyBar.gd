@@ -12,4 +12,3 @@ func set_value(value: int, max: int):
 			i.visible = false
 		for i in range(value):
 			v_box_container.get_child(i).visible = true
-
