@@ -3,7 +3,7 @@ extends Node
 
 @onready var tile_map = %TileMap
 @onready var tokens = %Tokens
-@onready var label = $"../CanvasLayer/Label"
+@onready var info_label: Label = %InfoLabel
 @onready var healths = %Healths
 @onready var enemy_manager = %EnemyManager
 @onready var selection_manager = %SelectionManager
@@ -20,6 +20,7 @@ signal start_player_turn
 var tokens_left: int
 var is_first_turn: bool = true
 var current_combat_phase: CombatPhase = CombatPhase.None
+var can_go_to_placing: bool = false
 
 enum CombatPhase {
 	None = -1,
@@ -57,7 +58,8 @@ func handle_click_in_placing_tokens():
 				player_turn()
 
 func handle_click_in_enemy_turn():
-	place()
+	if enemy_manager.finished:
+		place()
 
 func update_tokens():
 	for token in tokens.combat_tokens:
@@ -134,10 +136,11 @@ func deal_damage_to_building(building: Building, damage: Damage):
 		building_manager.remove_building(building)
 
 func update_placing_label():
-	label.text = "Placing " + tokens.combat_tokens[tokens_left].name + "..."
+	info_label.text = "Placing " + tokens.combat_tokens[tokens_left].name + "..."
 	if tokens_left < 0:
-		label.text = ""
+		info_label.text = ""
 
 func finish_player_turn():
 	current_combat_phase = CombatPhase.EnemyTurn
 	phase.update_label()
+	enemy_manager.manage_enemy_turn()
