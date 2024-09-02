@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Enemy" load_steps=9 format=3 uid="uid://dkgfls00lg17p"]
+[gd_resource type="Resource" script_class="Enemy" load_steps=10 format=3 uid="uid://dkgfls00lg17p"]
 
 [ext_resource type="Script" path="res://scripts/Movement/Movement.gd" id="1_6x0ir"]
 [ext_resource type="Script" path="res://scripts/Enemies/Enemy.gd" id="1_uh4qx"]
 [ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="2_4apsq"]
 [ext_resource type="Script" path="res://scripts/Combat/Attack.gd" id="3_kjdbf"]
+[ext_resource type="Script" path="res://scripts/Enemies/Passive.gd" id="4_x1336"]
 
 [sub_resource type="Resource" id="Resource_1iy1v"]
 script = ExtResource("1_6x0ir")
@@ -38,3 +39,4 @@ health = 20
 movement = SubResource("Resource_et1w0")
 attack = SubResource("Resource_rowce")
 agressiveness = 1.0
+passives = Array[ExtResource("4_x1336")]([])

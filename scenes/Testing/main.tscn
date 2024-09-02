@@ -1,6 +1,6 @@
-[gd_scene load_steps=66 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=67 format=4 uid="uid://c8q6x3pmng0nx"]
 
-[ext_resource type="Texture2D" uid="uid://c8mkrsejp2xff" path="res://graphics/tiles/ground/default.aseprite" id="1_bl5rc"]
+[ext_resource type="Texture2D" uid="uid://cxram7f4ccl13" path="res://graphics/tiles/examples/ground.aseprite" id="1_ma1pn"]
 [ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_sfowe"]
 [ext_resource type="Texture2D" uid="uid://blg2ba8rvwjke" path="res://graphics/tiles/buildings/buildings.aseprite" id="2_0v2bg"]
 [ext_resource type="Texture2D" uid="uid://bhkkx8ewg3leu" path="res://graphics/tiles/tokens/tokens.aseprite" id="2_2uwmq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/Tilemap/TileMap.gd" id="4_iggaw"]
 [ext_resource type="Script" path="res://scripts/Combat/CombatManager.gd" id="5_f5gbh"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/StartBattleButton.gd" id="5_ja3ef"]
+[ext_resource type="Texture2D" uid="uid://2wkc8prtprhi" path="res://graphics/tiles/ground/ground1.aseprite" id="5_p2uvn"]
 [ext_resource type="Script" path="res://scripts/Tokens/TokenInventory.gd" id="5_v462x"]
 [ext_resource type="Script" path="res://scripts/Enemies/EnemyManager.gd" id="7_044s7"]
 [ext_resource type="Resource" uid="uid://083sj6g4ytev" path="res://resources/Tokens/big.tres" id="7_ije6g"]
@@ -61,6 +62,7 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrmtx"]
 texture = ExtResource("1_sfowe")
+margins = Vector2i(0, 1)
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -8)
@@ -104,12 +106,14 @@ texture_region_size = Vector2i(32, 32)
 3:0/0/texture_origin = Vector2i(0, -8)
 3:0/0/custom_data_0 = 1003
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbeix"]
-texture = ExtResource("1_bl5rc")
-texture_region_size = Vector2i(32, 32)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hi7tm"]
+texture = ExtResource("5_p2uvn")
+texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/texture_origin = Vector2i(0, -16)
+0:1/0 = 0
 1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pippe"]
 texture = ExtResource("2_2uwmq")
@@ -141,17 +145,23 @@ texture_region_size = Vector2i(32, 32)
 tile_shape = 1
 tile_layout = 5
 tile_offset_axis = 1
-tile_size = Vector2i(32, 16)
+tile_size = Vector2i(64, 32)
 custom_data_layer_0/name = "Token"
 custom_data_layer_0/type = 2
-sources/4 = SubResource("TileSetAtlasSource_wbeix")
 sources/5 = SubResource("TileSetAtlasSource_pippe")
 sources/6 = SubResource("TileSetAtlasSource_asbr0")
 sources/0 = SubResource("TileSetAtlasSource_wrmtx")
 sources/2 = SubResource("TileSetAtlasSource_byvwr")
 sources/1 = SubResource("TileSetAtlasSource_k7wba")
+sources/3 = SubResource("TileSetAtlasSource_hi7tm")
 
 [node name="Main" type="Node2D"]
+
+[node name="Ground2" type="Sprite2D" parent="."]
+z_index = 100
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("1_ma1pn")
 
 [node name="TileMap" type="Node2D" parent="." groups=["TileMap"]]
 unique_name_in_owner = true
@@ -163,7 +173,7 @@ script = ExtResource("4_iggaw")
 y_sort_enabled = true
 texture_filter = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD//wAABAAAAAAAAAD/////BAAAAAAAAAD//wEABAAAAAAAAAAAAAAABAAAAAAAAAAAAAEABAAAAAAAAAAAAP//BAAAAAAAAAD+////BAAAAAAAAAD+/wAABAAAAAAAAAD+/wEABAAAAAAAAAABAP//BAAAAAAAAAABAAEABAAAAAAAAAABAAAABAAAAAAAAAD+/wIABAAAAAAAAAD//wIABAAAAAAAAAAAAAIABAAAAAAAAAABAAIABAAAAAAAAAD8//3/BAAAAAAAAAD8//7/BAAAAAAAAAD8////BAAAAAAAAAD8/wAABAAAAAAAAAD9/wAABAAAAAAAAAD9/wEABAAAAAAAAAD9/wIABAAAAAAAAAD9//7/BAAAAAAAAAD9//3/BAAAAAAAAAD9////BAAAAAAAAAD+//7/BAAAAAAAAAD+//3/BAAAAAAAAAD///7/BAAAAAAAAAD///3/BAAAAAAAAAAAAP3/BAAAAAAAAAABAP3/BAAAAAAAAAABAP7/BAAAAAAAAAAAAP7/BAAAAAAAAAD8/wEABAAAAAAAAAD8/wIABAAAAAAAAAACAP7/BAAAAAAAAAACAP3/BAAAAAAAAAACAP//BAAAAAAAAAACAAAABAAAAAAAAAACAAMABAAAAAAAAAACAAIABAAAAAAAAAACAAEABAAAAAAAAAABAAMABAAAAAAAAAAAAAMABAAAAAAAAAD//wMABAAAAAAAAAD9/wMABAAAAAAAAAD8/wMABAAAAAAAAAD+/wMABAAAAAAAAAD7//z/BAAAAAAAAAD8//z/BAAAAAAAAAD9//z/BAAAAAAAAAD+//z/BAAAAAAAAAD///z/BAAAAAAAAAAAAPz/BAAAAAAAAAABAPz/BAAAAAAAAAACAPz/BAAAAAAAAAD7//3/BAAAAAAAAAD7//7/BAAAAAAAAAD7////BAAAAAAAAAD7/wAABAAAAAAAAAD7/wEABAAAAAAAAAD7/wIABAAAAAAAAAD7/wMABAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wAAAwABAAAAAAD/////AwABAAAAAAD//wEAAwABAAAAAAAAAAAAAwABAAAAAAAAAAEAAwABAAAAAAAAAP//AwABAAAAAAD+////AwABAAAAAAD+/wAAAwABAAAAAAD+/wEAAwABAAAAAAABAP//AwABAAAAAAABAAEAAwABAAAAAAABAAAAAwABAAAAAAD+/wIAAwABAAAAAAD//wIAAwABAAAAAAAAAAIAAwABAAAAAAABAAIAAwABAAAAAAD8//3/AwABAAAAAAD8//7/AwABAAAAAAD8////AwABAAAAAAD8/wAAAwABAAAAAAD9/wAAAwABAAAAAAD9/wEAAwABAAAAAAD9/wIAAwABAAAAAAD9//7/AwABAAAAAAD9//3/AwABAAAAAAD9////AwABAAAAAAD+//7/AwABAAAAAAD+//3/AwABAAAAAAD///7/AwABAAAAAAD///3/AwABAAAAAAAAAP3/AwABAAAAAAABAP3/AwABAAAAAAABAP7/AwABAAAAAAAAAP7/AwABAAAAAAD8/wEAAwABAAAAAAD8/wIAAwABAAAAAAACAP7/AwABAAAAAAACAP3/AwABAAAAAAACAP//AwABAAAAAAACAAAAAwABAAAAAAACAAMAAwABAAAAAAACAAIAAwABAAAAAAACAAEAAwABAAAAAAABAAMAAwABAAAAAAAAAAMAAwABAAAAAAD//wMAAwABAAAAAAD9/wMAAwABAAAAAAD8/wMAAwABAAAAAAD+/wMAAwABAAAAAAD7//z/AwABAAAAAAD8//z/AwABAAAAAAD9//z/AwABAAAAAAD+//z/AwABAAAAAAD///z/AwABAAAAAAAAAPz/AwABAAAAAAABAPz/AwABAAAAAAACAPz/AwABAAAAAAD7//3/AwABAAAAAAD7//7/AwABAAAAAAD7////AwABAAAAAAD7/wAAAwABAAAAAAD7/wEAAwABAAAAAAD7/wIAAwABAAAAAAD7/wMAAwABAAAAAAA=")
 tile_set = SubResource("TileSet_7i166")
 
 [node name="Cover 1" type="TileMapLayer" parent="TileMap"]
@@ -187,7 +197,7 @@ tile_set = SubResource("TileSet_7i166")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 22)
-zoom = Vector2(3, 3)
+zoom = Vector2(1.5, 1.5)
 
 [node name="CombatManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -511,8 +521,8 @@ script = ExtResource("42_wfycr")
 card_name = &"Home Point"
 
 [connection signal="placing_tokens" from="CombatManager" to="EnemyManager" method="_on_combat_manager_placing_tokens"]
-[connection signal="placing_tokens" from="CombatManager" to="Inventory/Tokens" method="_on_placing_tokens"]
 [connection signal="placing_tokens" from="CombatManager" to="ObstacleManager" method="_on_combat_manager_placing_tokens"]
+[connection signal="placing_tokens" from="CombatManager" to="Inventory/Tokens" method="_on_placing_tokens"]
 [connection signal="start_player_turn" from="CombatManager" to="BuildingManager" method="start_player_turn"]
 [connection signal="start_player_turn" from="CombatManager" to="CanvasLayer/BottomButton" method="_on_combat_manager_start_player_turn"]
 [connection signal="changed_action_type" from="SelectionManager" to="CanvasLayer/InfoLabel" method="changed_action_type"]
