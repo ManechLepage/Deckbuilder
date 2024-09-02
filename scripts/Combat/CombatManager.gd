@@ -14,6 +14,7 @@ extends Node
 @onready var cards = %Cards
 @onready var building_manager = %BuildingManager
 @onready var enemy_intents: EnemyIntents = %EnemyIntents
+@onready var obstacle_manager: ObstacleManager = %ObstacleManager
 
 signal placing_tokens
 signal start_player_turn
@@ -83,6 +84,10 @@ func update_buildings():
 		healths.update_building_health(building)
 		cards.get_card_action(building).update()
 
+func update_obstacles():
+	for obstacle in obstacle_manager.obstacles:
+		pass
+
 func player_turn():
 	current_combat_phase = CombatPhase.PlayerTurn
 	phase.update_label()
@@ -90,6 +95,7 @@ func player_turn():
 	update_enemies()
 	update_tokens()
 	update_buildings()
+	update_obstacles()
 	reset_tokens()
 	
 	essence_manager.replenish()
@@ -122,7 +128,7 @@ func attack(token: Token, target: Vector2i):
 func deal_damage_to_tile(tile: Vector2i, damage: Damage):
 	var content = tile_map.get_tile_content(tile)
 	if content:
-		if content < 0:
+		if content < 0 and content > -1000:
 			deal_damage_to_enemy(enemy_manager.get_enemy_at_position(tile), damage)
 	for building in building_manager.buildings:
 		if building.position == tile:
@@ -130,6 +136,9 @@ func deal_damage_to_tile(tile: Vector2i, damage: Damage):
 	for token in tokens.combat_tokens:
 		if token.position == tile:
 			deal_damage_to_token(token, damage)
+	for obstacle: Obstacle in obstacle_manager.obstacles:
+		if obstacle.position == tile:
+			deal_damage_to_obstacle(obstacle, damage)
 
 func deal_damage_to_enemy(enemy: Enemy, damage: Damage):
 	#print("HIT")
@@ -146,6 +155,10 @@ func deal_damage_to_token(token: Token, damage: Damage):
 	token.health -= damage.value
 	#if token.health < 1:
 		#tokens.remove_building(building)
+
+func deal_damage_to_obstacle(obstacle: Obstacle, damage: Damage):
+	if damage.value > 0 and obstacle.destroyable:
+		obstacle_manager.remove_obstacle(obstacle)
 
 func update_placing_label():
 	info_label.text = "Placing " + tokens.combat_tokens[tokens_left].name + "..."

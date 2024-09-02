@@ -7,16 +7,17 @@ extends Node
 @onready var combat_manager = %CombatManager
 @onready var phase = %Phase
 @onready var building_manager = %BuildingManager
+@onready var obstacle_manager: ObstacleManager = %ObstacleManager
 
 var used_tiles: Array[Vector2i]
 
 func roll():
 	tile_map.clear_floor()
 	used_tiles.clear()
+	roll_obstacles()
 	roll_tokens()
 	roll_enemies()
 	roll_buildings()
-	roll_obstacles()
 	combat_manager.player_turn()
 
 func roll_tokens():
@@ -33,7 +34,14 @@ func roll_buildings():
 		tile_map.place_building(building, get_random_position())
 
 func roll_obstacles():
-	pass
+	for obstacle in obstacle_manager.obstacles:
+		if obstacle.fixed:
+			tile_map.place_obstacle(obstacle, obstacle.position)
+			used_tiles.append(obstacle.position)
+	
+	for obstacle in obstacle_manager.obstacles:
+		if not obstacle.fixed or obstacle.position == Vector2i(-100, -100):
+			tile_map.place_obstacle(obstacle, get_random_position())
 
 func get_random_position():
 	while true:

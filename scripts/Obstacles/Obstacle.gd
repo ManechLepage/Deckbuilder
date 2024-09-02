@@ -4,3 +4,5 @@ extends Resource
 @export var sprite: Vector2i
 @export var fixed: bool
 @export var destroyable: bool
+
+var position: Vector2i = Vector2i(-100, -100)

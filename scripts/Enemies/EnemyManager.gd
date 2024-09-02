@@ -21,7 +21,7 @@ func get_enemy_at_position(position: Vector2i):
 	return null
 
 func remove_enemy(enemy: Enemy):
-	tile_map.erase_cell(1, enemy.position)
+	tile_map.cover_1.erase_cell(enemy.position)
 	healths.destroy_enemy_health(enemy)
 	enemies.erase(enemy)
 

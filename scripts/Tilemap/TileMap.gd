@@ -50,6 +50,10 @@ func place_building(building: Building, position: Vector2i):
 	cover_1.set_cell(position, 2, building.building_sprite)
 	building_manager.update_building_position(building)
 
+func place_obstacle(obstacle: Obstacle, position: Vector2i):
+	obstacle.position = position
+	cover_1.set_cell(position, 1, obstacle.sprite)
+
 func clear_floor():
 	for tile in cover_1.get_used_cells():
 		cover_1.erase_cell(tile)
