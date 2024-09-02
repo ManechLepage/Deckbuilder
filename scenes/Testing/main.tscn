@@ -1,10 +1,11 @@
-[gd_scene load_steps=51 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=62 format=4 uid="uid://c8q6x3pmng0nx"]
 
 [ext_resource type="Texture2D" uid="uid://c8mkrsejp2xff" path="res://graphics/tiles/ground/default.aseprite" id="1_bl5rc"]
 [ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_sfowe"]
 [ext_resource type="Texture2D" uid="uid://blg2ba8rvwjke" path="res://graphics/tiles/buildings/buildings.aseprite" id="2_0v2bg"]
 [ext_resource type="Texture2D" uid="uid://bhkkx8ewg3leu" path="res://graphics/tiles/tokens/tokens.aseprite" id="2_2uwmq"]
 [ext_resource type="Texture2D" uid="uid://dbiv18jqnwn2w" path="res://graphics/tiles/enemy/enemy_standard.aseprite" id="3_1qusw"]
+[ext_resource type="Texture2D" uid="uid://dfc02i7o8i307" path="res://graphics/tiles/obstacles/obstacle.aseprite" id="3_minwr"]
 [ext_resource type="Script" path="res://scripts/Tilemap/TileMap.gd" id="4_iggaw"]
 [ext_resource type="Script" path="res://scripts/Combat/CombatManager.gd" id="5_f5gbh"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/StartBattleButton.gd" id="5_ja3ef"]
@@ -19,12 +20,16 @@
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingManager.gd" id="10_bp4um"]
 [ext_resource type="Script" path="res://scripts/Enemies/Enemy.gd" id="10_ng17c"]
 [ext_resource type="Script" path="res://scripts/Combat/EssenceManager.gd" id="11_d6jka"]
+[ext_resource type="Resource" uid="uid://dxncjl8b0x8yr" path="res://resources/Enemies/Support.tres" id="12_55ijl"]
 [ext_resource type="Script" path="res://scripts/Health/HealthManager.gd" id="13_7sb8f"]
 [ext_resource type="PackedScene" uid="uid://bqnrfrlkcmgqh" path="res://scenes/UI/health.tscn" id="13_ixdpm"]
+[ext_resource type="Resource" uid="uid://b0jmqnfplrtn7" path="res://resources/Enemies/Assasin.tres" id="13_jlq3s"]
+[ext_resource type="Script" path="res://scripts/Enemies/PassiveManagergd.gd" id="14_fbt0a"]
 [ext_resource type="Script" path="res://scripts/Cards/CardManager.gd" id="16_3ncu0"]
 [ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="16_wv05o"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/TopButton.gd" id="19_5vo3e"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/Phase.gd" id="19_ak35g"]
+[ext_resource type="Script" path="res://scripts/Obstacles/ObstacleManager.gd" id="19_u0o0i"]
 [ext_resource type="Resource" uid="uid://br1b6psejuo83" path="res://resources/Cards/HomePoint.tres" id="20_tl8gv"]
 [ext_resource type="Script" path="res://scripts/Cards/card.gd" id="21_4gcxx"]
 [ext_resource type="Texture2D" uid="uid://b0imspfnxv1ii" path="res://graphics/energy/bar.aseprite" id="21_p3m75"]
@@ -33,10 +38,15 @@
 [ext_resource type="Resource" uid="uid://dgwgax7k48mw6" path="res://resources/Cards/Fight.tres" id="22_y3p1o"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/InfoLabel.gd" id="28_51rc0"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/DrawPile.gd" id="28_pa4gw"]
+[ext_resource type="Script" path="res://scripts/UI/Combat/EnemyIntents.gd" id="29_hdoyd"]
+[ext_resource type="Texture2D" uid="uid://4xoprg4chgl7" path="res://graphics/icons/passive.aseprite" id="30_8xp64"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/Discard.gd" id="30_bh0kq"]
 [ext_resource type="Texture2D" uid="uid://wgk7p7hdeg1x" path="res://graphics/cards/deck.aseprite" id="31_juuhc"]
+[ext_resource type="Texture2D" uid="uid://3d1g031bkhxh" path="res://graphics/icons/attack.aseprite" id="31_mhi4q"]
+[ext_resource type="Texture2D" uid="uid://d181bjtlvb6f" path="res://graphics/icons/no_intents.aseprite" id="32_ca3pw"]
 [ext_resource type="Texture2D" uid="uid://chreydw1dvwrj" path="res://graphics/cards/discard.aseprite" id="32_oalup"]
 [ext_resource type="Script" path="res://scripts/Cards/CardActions.gd" id="33_0knp2"]
+[ext_resource type="PackedScene" uid="uid://datpadblhdkq7" path="res://scenes/UI/intent.tscn" id="33_4d7ky"]
 [ext_resource type="Script" path="res://scripts/Cards/CustomActions/SecondStrike.gd" id="33_d6mmd"]
 [ext_resource type="Script" path="res://scripts/Cards/CustomActions/Regeneration.gd" id="34_4l7ii"]
 [ext_resource type="Script" path="res://scripts/Cards/CustomActions/Fight.gd" id="35_q7vey"]
@@ -56,6 +66,22 @@ texture_region_size = Vector2i(32, 32)
 1:0/0/texture_origin = Vector2i(0, -8)
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7wba"]
+texture = ExtResource("3_minwr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = -1000
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = -1001
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+2:0/0/custom_data_0 = -1002
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_byvwr"]
 texture = ExtResource("2_0v2bg")
@@ -101,6 +127,11 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/texture_origin = Vector2i(0, -8)
 0:0/0/custom_data_0 = -1
 0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+0:1/0/custom_data_0 = -3
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = -2
 
 [sub_resource type="TileSet" id="TileSet_7i166"]
 tile_shape = 1
@@ -114,10 +145,11 @@ sources/5 = SubResource("TileSetAtlasSource_pippe")
 sources/6 = SubResource("TileSetAtlasSource_asbr0")
 sources/0 = SubResource("TileSetAtlasSource_wrmtx")
 sources/2 = SubResource("TileSetAtlasSource_byvwr")
+sources/1 = SubResource("TileSetAtlasSource_k7wba")
 
 [node name="Main" type="Node2D"]
 
-[node name="TileMap" type="Node2D" parent="."]
+[node name="TileMap" type="Node2D" parent="." groups=["TileMap"]]
 unique_name_in_owner = true
 y_sort_enabled = true
 texture_filter = 1
@@ -164,7 +196,11 @@ script = ExtResource("9_d3y2r")
 [node name="EnemyManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_044s7")
-testing_enemies = Array[ExtResource("10_ng17c")]([ExtResource("8_nbnuu"), ExtResource("8_nbnuu"), ExtResource("8_nbnuu")])
+testing_enemies = Array[ExtResource("10_ng17c")]([ExtResource("13_jlq3s"), ExtResource("8_nbnuu"), ExtResource("12_55ijl")])
+
+[node name="PassiveManager" type="Node" parent="EnemyManager"]
+unique_name_in_owner = true
+script = ExtResource("14_fbt0a")
 
 [node name="BuildingManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -177,6 +213,10 @@ script = ExtResource("10_biw57")
 [node name="EssenceManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("11_d6jka")
+
+[node name="ObstacleManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("19_u0o0i")
 
 [node name="Inventory" type="Node" parent="."]
 
@@ -203,6 +243,24 @@ mouse_filter = 2
 script = ExtResource("13_7sb8f")
 health_label = ExtResource("13_ixdpm")
 offset = Vector2(-5, 15)
+
+[node name="EnemyIntents" type="Control" parent="."]
+unique_name_in_owner = true
+z_index = 101
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("29_hdoyd")
+offset = Vector2(-5, 0)
+passive_icon = ExtResource("30_8xp64")
+attack_icon = ExtResource("31_mhi4q")
+no_intents_icon = ExtResource("32_ca3pw")
+intent_control = ExtResource("33_4d7ky")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." groups=["Canvas"]]
 unique_name_in_owner = true
@@ -449,6 +507,7 @@ card_name = &"Home Point"
 
 [connection signal="placing_tokens" from="CombatManager" to="EnemyManager" method="_on_combat_manager_placing_tokens"]
 [connection signal="placing_tokens" from="CombatManager" to="Inventory/Tokens" method="_on_placing_tokens"]
+[connection signal="placing_tokens" from="CombatManager" to="ObstacleManager" method="_on_combat_manager_placing_tokens"]
 [connection signal="start_player_turn" from="CombatManager" to="BuildingManager" method="start_player_turn"]
 [connection signal="start_player_turn" from="CombatManager" to="CanvasLayer/BottomButton" method="_on_combat_manager_start_player_turn"]
 [connection signal="changed_action_type" from="SelectionManager" to="CanvasLayer/InfoLabel" method="changed_action_type"]

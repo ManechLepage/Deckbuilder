@@ -1,3 +1,4 @@
+class_name EssenceManager
 extends Node
 
 var essence: int

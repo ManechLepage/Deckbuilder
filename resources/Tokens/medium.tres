@@ -9,6 +9,6 @@ script = ExtResource("1_fabcj")
 id = 1
 name = &"Medium"
 sprite = Vector2i(1, 0)
-health = 4
+health = 25
 movement = ExtResource("1_oa3lo")
 attack = ExtResource("1_75sec")

@@ -13,6 +13,7 @@ extends Node
 @onready var essence_manager = %EssenceManager
 @onready var cards = %Cards
 @onready var building_manager = %BuildingManager
+@onready var enemy_intents: EnemyIntents = %EnemyIntents
 
 signal placing_tokens
 signal start_player_turn
@@ -70,9 +71,12 @@ func reset_tokens():
 		token.has_moved = false
 		token.attacks_this_turn = 0
 
-func update_enemies():
+func update_enemies(update_intents=true):
 	for enemy in enemy_manager.enemies:
 		healths.update_enemy(enemy)
+		if update_intents:
+			enemy_manager.update_enemy_intent(enemy)
+	enemy_intents.update_intents()
 
 func update_buildings():
 	for building in building_manager.buildings:
@@ -123,6 +127,9 @@ func deal_damage_to_tile(tile: Vector2i, damage: Damage):
 	for building in building_manager.buildings:
 		if building.position == tile:
 			deal_damage_to_building(building, damage)
+	for token in tokens.combat_tokens:
+		if token.position == tile:
+			deal_damage_to_token(token, damage)
 
 func deal_damage_to_enemy(enemy: Enemy, damage: Damage):
 	#print("HIT")
@@ -134,6 +141,11 @@ func deal_damage_to_building(building: Building, damage: Damage):
 	building.health -= damage.value
 	if building.health < 1:
 		building_manager.remove_building(building)
+
+func deal_damage_to_token(token: Token, damage: Damage):
+	token.health -= damage.value
+	#if token.health < 1:
+		#tokens.remove_building(building)
 
 func update_placing_label():
 	info_label.text = "Placing " + tokens.combat_tokens[tokens_left].name + "..."

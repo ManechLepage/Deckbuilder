@@ -6,3 +6,4 @@
 script = ExtResource("1_385o1")
 relative_directions = Array[Vector2i]([])
 distance = 1
+relative_positions = Array[Vector2i]([])

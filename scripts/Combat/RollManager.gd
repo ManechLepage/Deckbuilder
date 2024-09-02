@@ -1,3 +1,4 @@
+class_name RollManager
 extends Node
 
 @onready var tile_map = %TileMap
@@ -25,6 +26,7 @@ func roll_tokens():
 func roll_enemies():
 	for enemy in enemy_manager.enemies:
 		tile_map.place_enemy(get_random_position(), enemy)
+		enemy.calculate_agresiveness()
 
 func roll_buildings():
 	for building in building_manager.buildings:

@@ -1,8 +1,40 @@
-[gd_resource type="Resource" script_class="Enemy" load_steps=2 format=3 uid="uid://dkgfls00lg17p"]
+[gd_resource type="Resource" script_class="Enemy" load_steps=9 format=3 uid="uid://dkgfls00lg17p"]
 
+[ext_resource type="Script" path="res://scripts/Movement/Movement.gd" id="1_6x0ir"]
 [ext_resource type="Script" path="res://scripts/Enemies/Enemy.gd" id="1_uh4qx"]
+[ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="2_4apsq"]
+[ext_resource type="Script" path="res://scripts/Combat/Attack.gd" id="3_kjdbf"]
+
+[sub_resource type="Resource" id="Resource_1iy1v"]
+script = ExtResource("1_6x0ir")
+relative_directions = Array[Vector2i]([])
+distance = 1
+relative_positions = Array[Vector2i]([])
+ignore_obstacles = true
+
+[sub_resource type="Resource" id="Resource_wxj8c"]
+script = ExtResource("2_4apsq")
+value = 4
+type = 0
+piercing = false
+
+[sub_resource type="Resource" id="Resource_rowce"]
+script = ExtResource("3_kjdbf")
+area = SubResource("Resource_1iy1v")
+choose = true
+damage = SubResource("Resource_wxj8c")
+
+[sub_resource type="Resource" id="Resource_et1w0"]
+script = ExtResource("1_6x0ir")
+relative_directions = Array[Vector2i]([])
+distance = 3
+relative_positions = Array[Vector2i]([])
+ignore_obstacles = false
 
 [resource]
 script = ExtResource("1_uh4qx")
 sprite = Vector2i(0, 0)
 health = 20
+movement = SubResource("Resource_et1w0")
+attack = SubResource("Resource_rowce")
+agressiveness = 1.0

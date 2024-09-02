@@ -1,3 +1,4 @@
+class_name TileManager
 extends Node2D
 @onready var ground: TileMapLayer = $Ground
 @onready var cover_1: TileMapLayer = $"Cover 1"
@@ -72,6 +73,11 @@ func move_token(token: Token, position: Vector2i):
 		cover_1.erase_cell(token.position)
 		place_token(position, token)
 
+func move_enemy(enemy: Enemy, position: Vector2i):
+	if enemy:
+		cover_1.erase_cell(enemy.position)
+		place_enemy(position, enemy)
+
 func make_token_selectable(token: Token):
 	var position = token.position
 	cover_1_indicator.set_cell(position, 0, Vector2i(1, 0))
@@ -93,7 +99,15 @@ func can_select(position: Vector2i):
 	else:
 		return false
 
-func get_obstacles():
+func get_obstacles(enemies=true):
 	var obstacles: Array[Vector2i]
 	obstacles.append_array(cover_1.get_used_cells())
-	return obstacles
+	
+	if enemies:
+		return obstacles
+	
+	var filtered_obstacles: Array[Vector2i]
+	for obstacle in obstacles:
+		if get_tile_content(obstacle) > -1:
+			filtered_obstacles.append(obstacle)
+	return filtered_obstacles

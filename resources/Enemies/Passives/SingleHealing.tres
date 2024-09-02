@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RandomHealing" load_steps=2 format=3 uid="uid://5vkytk51u470"]
+
+[ext_resource type="Script" path="res://scripts/Enemies/Passives/RandomHealing.gd" id="1_2nmiu"]
+
+[resource]
+script = ExtResource("1_2nmiu")
+times = 1
+value = 3

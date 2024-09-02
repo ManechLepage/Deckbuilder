@@ -1,9 +1,12 @@
+class_name EnemyManager
 extends Node
 
 @onready var tile_map = %TileMap
 @export var testing_enemies: Array[Enemy]
 var enemies: Array[Enemy]
 @onready var healths = %Healths
+@onready var combat_manager: CombatManager = %CombatManager
+@onready var passive_manager: PassiveManager = %PassiveManager
 
 var finished = false
 
@@ -27,9 +30,29 @@ func manage_enemy_turn():
 	enemies.shuffle()
 	
 	for enemy: Enemy in enemies:
-		# Move enemy
+		update_enemy_intent(enemy)
+		if enemy.can_enemy_attack:
+			enemy.choose_target()
+			tile_map.move_enemy(enemy, enemy.target[1])
+		else:
+			var target = enemy.get_random_movement(tile_map.get_obstacles())
+			tile_map.move_enemy(enemy, target)
+		
+		combat_manager.update_enemies(false)
 		await get_tree().create_timer(0.3).timeout
-		# Attack enemy
+		
+		if enemy.can_enemy_attack and enemy.does_attack:
+			combat_manager.deal_damage_to_tile(enemy.target[0], enemy.attack.damage)
+		else:
+			var passive: Passive = enemy.choose_passive()
+			if passive:
+				passive_manager.activate(passive)
+		
+		combat_manager.update_tokens()
+		combat_manager.update_buildings()
 		await get_tree().create_timer(0.3).timeout
 	
 	finished = true
+
+func update_enemy_intent(enemy: Enemy):
+	enemy.can_enemy_attack = enemy.can_attack(tile_map.get_obstacles(false), tile_map.get_obstacles())

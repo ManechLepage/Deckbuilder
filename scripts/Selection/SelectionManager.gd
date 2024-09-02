@@ -1,3 +1,4 @@
+class_name SelectionManager
 extends Node
 
 @onready var tile_map = %TileMap

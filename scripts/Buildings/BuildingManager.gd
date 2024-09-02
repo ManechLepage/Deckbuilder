@@ -1,3 +1,4 @@
+class_name BuildingManager
 extends Node
 
 @onready var tile_map = %TileMap
@@ -7,7 +8,6 @@ extends Node
 var buildings: Array[Building]
 
 func create_building(card: Building, position: Vector2i):
-	print(position)
 	var building: Building = card.duplicate(true)
 	buildings.append(building)
 	tile_map.place_building(building, position)
@@ -28,5 +28,4 @@ func start_player_turn():
 		building.current_ability_usage = 0
 
 func update_building_position(building: Building):
-	print(building.position, "---")
 	cards.get_card_action(building).position = building.position
