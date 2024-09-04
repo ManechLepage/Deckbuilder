@@ -4,6 +4,9 @@ extends Node
 @onready var tile_map = %TileMap
 @onready var healths = %Healths
 @onready var cards = %Cards
+@onready var canvas_layer: CanvasLayer = %CanvasLayer
+
+@export var ability_pop_up: PackedScene
 
 var buildings: Array[Building]
 
@@ -19,6 +22,12 @@ func remove_building(building: Building):
 	buildings.erase(building)
 
 func activate_ability(building: Building):
+	print("Activate")
+	var pop_up = ability_pop_up.instantiate()
+	canvas_layer.add_child(pop_up)
+	pop_up.load(building)
+
+func activate(building: Building):
 	if building.can_use_ability():
 		cards.get_card_action(building).ability()
 

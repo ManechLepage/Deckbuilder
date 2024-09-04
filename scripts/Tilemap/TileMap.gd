@@ -92,7 +92,7 @@ func clear_cover_selections():
 
 func can_select_for_movement(position: Vector2i):
 	if get_tile_content(position):
-		if get_tile_content(position) > -1:
+		if get_tile_content(position) > -1 and get_tile_content(position) < 1000 :
 			return true
 	else:
 		return false

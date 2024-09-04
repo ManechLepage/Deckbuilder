@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=68 format=4 uid="uid://c8q6x3pmng0nx"]
 
 [ext_resource type="Texture2D" uid="uid://cxram7f4ccl13" path="res://graphics/tiles/examples/ground.aseprite" id="1_ma1pn"]
 [ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_sfowe"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://scripts/Enemies/PassiveManagergd.gd" id="14_fbt0a"]
 [ext_resource type="Script" path="res://scripts/Cards/CardManager.gd" id="16_3ncu0"]
 [ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="16_wv05o"]
+[ext_resource type="PackedScene" uid="uid://nkrxrmnlyle8" path="res://scenes/UI/ability_pop_up.tscn" id="18_td7a0"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/TopButton.gd" id="19_5vo3e"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/Phase.gd" id="19_ak35g"]
 [ext_resource type="Script" path="res://scripts/Obstacles/ObstacleManager.gd" id="19_u0o0i"]
@@ -158,6 +159,7 @@ sources/3 = SubResource("TileSetAtlasSource_hi7tm")
 [node name="Main" type="Node2D"]
 
 [node name="Ground2" type="Sprite2D" parent="."]
+visible = false
 z_index = 100
 texture_filter = 1
 position = Vector2(0, -16)
@@ -216,9 +218,10 @@ testing_enemies = Array[ExtResource("10_ng17c")]([ExtResource("13_jlq3s"), ExtRe
 unique_name_in_owner = true
 script = ExtResource("14_fbt0a")
 
-[node name="BuildingManager" type="Node" parent="."]
+[node name="BuildingManager" type="Node" parent="." groups=["BuildingManager"]]
 unique_name_in_owner = true
 script = ExtResource("10_bp4um")
+ability_pop_up = ExtResource("18_td7a0")
 
 [node name="RollManager" type="Node" parent="."]
 unique_name_in_owner = true

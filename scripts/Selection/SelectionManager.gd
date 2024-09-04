@@ -101,11 +101,10 @@ func check_for_card():
 			is_playing_card = true
 
 func check_for_building():
-	if current_selection_type == WaitingSelection.All or current_selection_type == WaitingSelection.Building:
-		var tile = tile_map.get_tile_from_mouse_position()
-		for building: Building in building_manager.buildings:
-			if building.position == tile:
-				building_manager.activate_ability(building)
+	var tile = tile_map.get_tile_from_mouse_position()
+	for building: Building in building_manager.buildings:
+		if building.position == tile:
+			building_manager.activate_ability(building)
 
 func token_selectable(selectable_tokens: Array[Token]):
 	clear_selections()
