@@ -1,15 +1,10 @@
-[gd_scene load_steps=68 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=56 format=4 uid="uid://c8q6x3pmng0nx"]
 
 [ext_resource type="Texture2D" uid="uid://cxram7f4ccl13" path="res://graphics/tiles/examples/ground.aseprite" id="1_ma1pn"]
-[ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_sfowe"]
-[ext_resource type="Texture2D" uid="uid://blg2ba8rvwjke" path="res://graphics/tiles/buildings/buildings.aseprite" id="2_0v2bg"]
-[ext_resource type="Texture2D" uid="uid://bhkkx8ewg3leu" path="res://graphics/tiles/tokens/tokens.aseprite" id="2_2uwmq"]
-[ext_resource type="Texture2D" uid="uid://dbiv18jqnwn2w" path="res://graphics/tiles/enemy/enemy_standard.aseprite" id="3_1qusw"]
-[ext_resource type="Texture2D" uid="uid://dfc02i7o8i307" path="res://graphics/tiles/obstacles/obstacle.aseprite" id="3_minwr"]
+[ext_resource type="TileSet" uid="uid://dbqfwepwmpejf" path="res://graphics/tiles/tile_set.tres" id="3_sqwkf"]
 [ext_resource type="Script" path="res://scripts/Tilemap/TileMap.gd" id="4_iggaw"]
 [ext_resource type="Script" path="res://scripts/Combat/CombatManager.gd" id="5_f5gbh"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/StartBattleButton.gd" id="5_ja3ef"]
-[ext_resource type="Texture2D" uid="uid://2wkc8prtprhi" path="res://graphics/tiles/ground/ground1.aseprite" id="5_p2uvn"]
 [ext_resource type="Script" path="res://scripts/Tokens/TokenInventory.gd" id="5_v462x"]
 [ext_resource type="Script" path="res://scripts/Enemies/EnemyManager.gd" id="7_044s7"]
 [ext_resource type="Resource" uid="uid://083sj6g4ytev" path="res://resources/Tokens/big.tres" id="7_ije6g"]
@@ -61,101 +56,6 @@
 [ext_resource type="Script" path="res://scripts/Cards/CustomActions/MilitaryCamp.gd" id="41_1com6"]
 [ext_resource type="Script" path="res://scripts/Cards/CustomActions/HomePoint.gd" id="42_wfycr"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrmtx"]
-texture = ExtResource("1_sfowe")
-margins = Vector2i(0, 1)
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -8)
-0:1/0 = 0
-0:1/0/texture_origin = Vector2i(0, -8)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -8)
-1:1/0 = 0
-1:1/0/texture_origin = Vector2i(0, -8)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7wba"]
-texture = ExtResource("3_minwr")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -8)
-0:0/0/custom_data_0 = -1000
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -8)
-1:0/0/custom_data_0 = -1001
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, -8)
-2:0/0/custom_data_0 = -1002
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_byvwr"]
-texture = ExtResource("2_0v2bg")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -8)
-0:0/0/custom_data_0 = 1000
-0:1/0 = 0
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -8)
-1:0/0/custom_data_0 = 1001
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, -8)
-2:0/0/custom_data_0 = 1002
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, -8)
-3:0/0/custom_data_0 = 1003
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hi7tm"]
-texture = ExtResource("5_p2uvn")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -16)
-0:1/0 = 0
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -16)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pippe"]
-texture = ExtResource("2_2uwmq")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -8)
-0:0/0/custom_data_0 = 3
-0:1/0 = 0
-0:1/0/texture_origin = Vector2i(0, -8)
-0:1/0/custom_data_0 = 2
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -8)
-1:0/0/custom_data_0 = 1
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asbr0"]
-texture = ExtResource("3_1qusw")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -8)
-0:0/0/custom_data_0 = -1
-0:1/0 = 0
-0:1/0/texture_origin = Vector2i(0, -8)
-0:1/0/custom_data_0 = -3
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -8)
-1:0/0/custom_data_0 = -2
-
-[sub_resource type="TileSet" id="TileSet_7i166"]
-tile_shape = 1
-tile_layout = 5
-tile_offset_axis = 1
-tile_size = Vector2i(64, 32)
-custom_data_layer_0/name = "Token"
-custom_data_layer_0/type = 2
-sources/5 = SubResource("TileSetAtlasSource_pippe")
-sources/6 = SubResource("TileSetAtlasSource_asbr0")
-sources/0 = SubResource("TileSetAtlasSource_wrmtx")
-sources/2 = SubResource("TileSetAtlasSource_byvwr")
-sources/1 = SubResource("TileSetAtlasSource_k7wba")
-sources/3 = SubResource("TileSetAtlasSource_hi7tm")
-
 [node name="Main" type="Node2D"]
 
 [node name="Ground2" type="Sprite2D" parent="."]
@@ -171,31 +71,85 @@ y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("4_iggaw")
 
+[node name="Underground" type="Node2D" parent="TileMap"]
+
+[node name="Underground1" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -1
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD8/wQAAwACAAAAAAD9/wQAAwADAAAAAAD+/wQAAwACAAAAAAD//wQAAwADAAAAAAAAAAQAAwADAAAAAAABAAQAAwADAAAAAAACAAQAAwACAAAAAAADAAQAAwADAAAAAAADAAMAAwADAAAAAAADAAIAAwADAAAAAAADAAEAAwACAAAAAAADAAAAAwADAAAAAAADAP//AwADAAAAAAADAP7/AwACAAAAAAADAP3/AwADAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -1
+
+[node name="Underground2" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -2
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAEAAQAAwADAAAAAAAEAAUAAwADAAAAAAAEAAEAAwADAAAAAAD//wUAAwADAAAAAAAAAAUAAwACAAAAAAABAAUAAwACAAAAAAACAAUAAwACAAAAAAADAAUAAwACAAAAAAD+/wUAAwACAAAAAAD9/wUAAwACAAAAAAAEAAMAAwACAAAAAAAEAAIAAwACAAAAAAAEAAAAAwACAAAAAAAEAP//AwACAAAAAAAEAP7/AwACAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -2
+
+[node name="Underground3" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -3
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAFAAUAAwADAAAAAAAFAAEAAwADAAAAAAD+/wYAAwACAAAAAAD//wYAAwACAAAAAAAAAAYAAwACAAAAAAABAAYAAwACAAAAAAACAAYAAwACAAAAAAADAAYAAwACAAAAAAAEAAYAAwACAAAAAAAFAAYAAwACAAAAAAAFAAQAAwACAAAAAAAFAAMAAwACAAAAAAAFAAIAAwACAAAAAAAFAAAAAwACAAAAAAAFAP//AwACAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -3
+
+[node name="Underground4" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -4
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD//wcAAwACAAAAAAAAAAcAAwACAAAAAAABAAcAAwACAAAAAAACAAcAAwACAAAAAAADAAcAAwACAAAAAAAEAAcAAwACAAAAAAAFAAcAAwACAAAAAAAGAAcAAwACAAAAAAAGAAYAAwACAAAAAAAGAAUAAwACAAAAAAAGAAQAAwACAAAAAAAGAAMAAwACAAAAAAAGAAIAAwACAAAAAAAGAAEAAwACAAAAAAAGAAAAAwACAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -4
+
+[node name="Underground5" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -5
+y_sort_enabled = true
+position = Vector2(0, 1)
+tile_map_data = PackedByteArray("AAAAAAgAAwACAAAAAAABAAgAAwACAAAAAAACAAgAAwACAAAAAAADAAgAAwACAAAAAAAEAAgAAwACAAAAAAAFAAgAAwACAAAAAAAGAAgAAwACAAAAAAAHAAgAAwACAAAAAAAHAAcAAwACAAAAAAAHAAYAAwACAAAAAAAHAAUAAwACAAAAAAAHAAQAAwACAAAAAAAHAAMAAwACAAAAAAAHAAIAAwACAAAAAAAHAAEAAwACAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -5
+
+[node name="Underground6" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -6
+y_sort_enabled = true
+position = Vector2(0, 1)
+tile_map_data = PackedByteArray("AAABAAkAAwACAAAAAAACAAkAAwACAAAAAAADAAkAAwACAAAAAAAEAAkAAwACAAAAAAAFAAkAAwACAAAAAAAGAAkAAwACAAAAAAAHAAkAAwACAAAAAAAIAAIAAwACAAAAAAAIAAMAAwACAAAAAAAIAAQAAwACAAAAAAAIAAUAAwACAAAAAAAIAAYAAwACAAAAAAAIAAcAAwACAAAAAAAIAAgAAwACAAAAAAAIAAkAAwACAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -6
+
+[node name="Underground7" type="TileMapLayer" parent="TileMap/Underground"]
+z_index = -7
+y_sort_enabled = true
+position = Vector2(0, 1)
+tile_map_data = PackedByteArray("AAACAAoAAwACAAAAAAADAAoAAwACAAAAAAAEAAoAAwACAAAAAAAFAAoAAwACAAAAAAAGAAoAAwACAAAAAAAHAAoAAwACAAAAAAAIAAoAAwACAAAAAAAJAAMAAwACAAAAAAAJAAQAAwACAAAAAAAJAAUAAwACAAAAAAAJAAYAAwACAAAAAAAJAAcAAwACAAAAAAAJAAgAAwACAAAAAAAJAAkAAwACAAAAAAAJAAoAAwACAAAAAAA=")
+tile_set = ExtResource("3_sqwkf")
+y_sort_origin = -7
+
 [node name="Ground" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 texture_filter = 1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD//wAAAwABAAAAAAD/////AwABAAAAAAD//wEAAwABAAAAAAAAAAAAAwABAAAAAAAAAAEAAwABAAAAAAAAAP//AwABAAAAAAD+////AwABAAAAAAD+/wAAAwABAAAAAAD+/wEAAwABAAAAAAABAP//AwABAAAAAAABAAEAAwABAAAAAAABAAAAAwABAAAAAAD+/wIAAwABAAAAAAD//wIAAwABAAAAAAAAAAIAAwABAAAAAAABAAIAAwABAAAAAAD8//3/AwABAAAAAAD8//7/AwABAAAAAAD8////AwABAAAAAAD8/wAAAwABAAAAAAD9/wAAAwABAAAAAAD9/wEAAwABAAAAAAD9/wIAAwABAAAAAAD9//7/AwABAAAAAAD9//3/AwABAAAAAAD9////AwABAAAAAAD+//7/AwABAAAAAAD+//3/AwABAAAAAAD///7/AwABAAAAAAD///3/AwABAAAAAAAAAP3/AwABAAAAAAABAP3/AwABAAAAAAABAP7/AwABAAAAAAAAAP7/AwABAAAAAAD8/wEAAwABAAAAAAD8/wIAAwABAAAAAAACAP7/AwABAAAAAAACAP3/AwABAAAAAAACAP//AwABAAAAAAACAAAAAwABAAAAAAACAAMAAwABAAAAAAACAAIAAwABAAAAAAACAAEAAwABAAAAAAABAAMAAwABAAAAAAAAAAMAAwABAAAAAAD//wMAAwABAAAAAAD9/wMAAwABAAAAAAD8/wMAAwABAAAAAAD+/wMAAwABAAAAAAD7//z/AwABAAAAAAD8//z/AwABAAAAAAD9//z/AwABAAAAAAD+//z/AwABAAAAAAD///z/AwABAAAAAAAAAPz/AwABAAAAAAABAPz/AwABAAAAAAACAPz/AwABAAAAAAD7//3/AwABAAAAAAD7//7/AwABAAAAAAD7////AwABAAAAAAD7/wAAAwABAAAAAAD7/wEAAwABAAAAAAD7/wIAAwABAAAAAAD7/wMAAwABAAAAAAA=")
-tile_set = SubResource("TileSet_7i166")
+tile_map_data = PackedByteArray("AAD//wAAAwAEAAUAAAD/////AwAEAAQAAAD//wEAAwAEAAYAAAAAAAAAAwAFAAUAAAAAAAEAAwAFAAYAAAAAAP//AwAFAAQAAAD+////AwADAAQAAAD+/wAAAwADAAUAAAD+/wEAAwADAAYAAAABAP//AwAGAAQAAAABAAEAAwAGAAYAAAABAAAAAwAGAAUAAAD+/wIAAwADAAcAAAD//wIAAwAEAAcAAAAAAAIAAwAFAAcAAAABAAIAAwAGAAcAAAD8//3/AwABAAIAAAD8//7/AwABAAMAAAD8////AwABAAQAAAD8/wAAAwABAAUAAAD9/wAAAwACAAUAAAD9/wEAAwACAAYAAAD9/wIAAwACAAcAAAD9//7/AwACAAMAAAD9//3/AwACAAIAAAD9////AwACAAQAAAD+//7/AwADAAMAAAD+//3/AwADAAIAAAD///7/AwAEAAMAAAD///3/AwAEAAIAAAAAAP3/AwAFAAIAAAABAP3/AwAGAAIAAAABAP7/AwAGAAMAAAAAAP7/AwAFAAMAAAD8/wEAAwABAAYAAAD8/wIAAwABAAcAAAACAP7/AwAHAAMAAAACAP3/AwAHAAIAAAACAP//AwAHAAQAAAACAAAAAwAHAAUAAAACAAMAAwAHAAgAAAACAAIAAwAHAAcAAAACAAEAAwAHAAYAAAABAAMAAwAGAAgAAAAAAAMAAwAFAAgAAAD//wMAAwAEAAgAAAD9/wMAAwACAAgAAAD8/wMAAwABAAgAAAD+/wMAAwADAAgAAAD7//z/AwAAAAEAAAD8//z/AwABAAEAAAD9//z/AwACAAEAAAD+//z/AwADAAEAAAD///z/AwAEAAEAAAAAAPz/AwAFAAEAAAABAPz/AwAGAAEAAAACAPz/AwAHAAEAAAD7//3/AwAAAAIAAAD7//7/AwAAAAMAAAD7////AwAAAAQAAAD7/wAAAwAAAAUAAAD7/wEAAwAAAAYAAAD7/wIAAwAAAAcAAAD7/wMAAwAAAAgAAAA=")
+tile_set = ExtResource("3_sqwkf")
 
 [node name="Cover 1" type="TileMapLayer" parent="TileMap"]
 z_index = 1
 y_sort_enabled = true
 use_parent_material = true
-tile_set = SubResource("TileSet_7i166")
+tile_set = ExtResource("3_sqwkf")
 y_sort_origin = 1
 
 [node name="GroundIndicator" type="TileMapLayer" parent="TileMap"]
 z_index = 1
 y_sort_enabled = true
 use_parent_material = true
-tile_set = SubResource("TileSet_7i166")
+tile_set = ExtResource("3_sqwkf")
 
 [node name="Cover1Indicator" type="TileMapLayer" parent="TileMap"]
 z_index = 2
 y_sort_enabled = true
 use_parent_material = true
-tile_set = SubResource("TileSet_7i166")
+tile_set = ExtResource("3_sqwkf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 22)

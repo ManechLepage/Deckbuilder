@@ -1,0 +1,234 @@
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://dbqfwepwmpejf"]
+
+[ext_resource type="Texture2D" uid="uid://claswseye8xxo" path="res://graphics/tiles/ground/selectable.aseprite" id="1_ulm61"]
+[ext_resource type="Texture2D" uid="uid://dfc02i7o8i307" path="res://graphics/tiles/obstacles/obstacle.aseprite" id="2_q728s"]
+[ext_resource type="Texture2D" uid="uid://blg2ba8rvwjke" path="res://graphics/tiles/buildings/buildings.aseprite" id="3_jhyaa"]
+[ext_resource type="Texture2D" uid="uid://2wkc8prtprhi" path="res://graphics/tiles/ground/ground1.aseprite" id="4_y6jcq"]
+[ext_resource type="Texture2D" uid="uid://bhkkx8ewg3leu" path="res://graphics/tiles/tokens/tokens.aseprite" id="5_1iyar"]
+[ext_resource type="Texture2D" uid="uid://dbiv18jqnwn2w" path="res://graphics/tiles/enemy/enemy_standard.aseprite" id="6_mb6ak"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrmtx"]
+texture = ExtResource("1_ulm61")
+margins = Vector2i(0, 1)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7wba"]
+texture = ExtResource("2_q728s")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = -1000
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = -1001
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+2:0/0/custom_data_0 = -1002
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_byvwr"]
+texture = ExtResource("3_jhyaa")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = 1000
+0:1/0 = 0
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = 1001
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+2:0/0/custom_data_0 = 1002
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
+3:0/0/custom_data_0 = 1003
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hi7tm"]
+texture = ExtResource("4_y6jcq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -16)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -16)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -16)
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, -16)
+1:2/0 = 0
+1:2/0/texture_origin = Vector2i(0, -16)
+2:2/0 = 0
+2:2/0/texture_origin = Vector2i(0, -16)
+2:3/0 = 0
+2:3/0/texture_origin = Vector2i(0, -16)
+3:3/0 = 0
+3:3/0/texture_origin = Vector2i(0, -16)
+3:4/0 = 0
+3:4/0/texture_origin = Vector2i(0, -16)
+4:4/0 = 0
+4:4/0/texture_origin = Vector2i(0, -16)
+4:5/0 = 0
+4:5/0/texture_origin = Vector2i(0, -16)
+5:5/0 = 0
+5:5/0/texture_origin = Vector2i(0, -16)
+5:6/0 = 0
+5:6/0/texture_origin = Vector2i(0, -16)
+6:6/0 = 0
+6:6/0/texture_origin = Vector2i(0, -16)
+6:7/0 = 0
+6:7/0/texture_origin = Vector2i(0, -16)
+7:7/0 = 0
+7:7/0/texture_origin = Vector2i(0, -16)
+7:8/0 = 0
+7:8/0/texture_origin = Vector2i(0, -16)
+7:6/0 = 0
+7:6/0/texture_origin = Vector2i(0, -16)
+7:5/0 = 0
+7:5/0/texture_origin = Vector2i(0, -16)
+7:4/0 = 0
+7:4/0/texture_origin = Vector2i(0, -16)
+7:3/0 = 0
+7:3/0/texture_origin = Vector2i(0, -16)
+7:2/0 = 0
+7:2/0/texture_origin = Vector2i(0, -16)
+7:1/0 = 0
+7:1/0/texture_origin = Vector2i(0, -16)
+6:1/0 = 0
+6:1/0/texture_origin = Vector2i(0, -16)
+5:1/0 = 0
+5:1/0/texture_origin = Vector2i(0, -16)
+4:1/0 = 0
+4:1/0/texture_origin = Vector2i(0, -16)
+3:1/0 = 0
+3:1/0/texture_origin = Vector2i(0, -16)
+2:1/0 = 0
+2:1/0/texture_origin = Vector2i(0, -16)
+3:2/0 = 0
+3:2/0/texture_origin = Vector2i(0, -16)
+4:2/0 = 0
+4:2/0/texture_origin = Vector2i(0, -16)
+5:2/0 = 0
+5:2/0/texture_origin = Vector2i(0, -16)
+6:2/0 = 0
+6:2/0/texture_origin = Vector2i(0, -16)
+6:3/0 = 0
+6:3/0/texture_origin = Vector2i(0, -16)
+6:4/0 = 0
+6:4/0/texture_origin = Vector2i(0, -16)
+6:5/0 = 0
+6:5/0/texture_origin = Vector2i(0, -16)
+5:4/0 = 0
+5:4/0/texture_origin = Vector2i(0, -16)
+5:3/0 = 0
+5:3/0/texture_origin = Vector2i(0, -16)
+4:3/0 = 0
+4:3/0/texture_origin = Vector2i(0, -16)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, -16)
+0:3/0 = 0
+0:3/0/texture_origin = Vector2i(0, -16)
+0:4/0 = 0
+0:4/0/texture_origin = Vector2i(0, -16)
+0:5/0 = 0
+0:5/0/texture_origin = Vector2i(0, -16)
+0:6/0 = 0
+0:6/0/texture_origin = Vector2i(0, -16)
+0:7/0 = 0
+0:7/0/texture_origin = Vector2i(0, -16)
+1:7/0 = 0
+1:7/0/texture_origin = Vector2i(0, -16)
+2:7/0 = 0
+2:7/0/texture_origin = Vector2i(0, -16)
+2:6/0 = 0
+2:6/0/texture_origin = Vector2i(0, -16)
+2:5/0 = 0
+2:5/0/texture_origin = Vector2i(0, -16)
+3:5/0 = 0
+3:5/0/texture_origin = Vector2i(0, -16)
+2:4/0 = 0
+2:4/0/texture_origin = Vector2i(0, -16)
+1:3/0 = 0
+1:3/0/texture_origin = Vector2i(0, -16)
+1:8/0 = 0
+1:8/0/texture_origin = Vector2i(0, -16)
+2:8/0 = 0
+2:8/0/texture_origin = Vector2i(0, -16)
+3:8/0 = 0
+3:8/0/texture_origin = Vector2i(0, -16)
+4:8/0 = 0
+4:8/0/texture_origin = Vector2i(0, -16)
+4:7/0 = 0
+4:7/0/texture_origin = Vector2i(0, -16)
+4:6/0 = 0
+4:6/0/texture_origin = Vector2i(0, -16)
+3:6/0 = 0
+3:6/0/texture_origin = Vector2i(0, -16)
+1:6/0 = 0
+1:6/0/texture_origin = Vector2i(0, -16)
+5:8/0 = 0
+5:8/0/texture_origin = Vector2i(0, -16)
+6:8/0 = 0
+6:8/0/texture_origin = Vector2i(0, -16)
+5:7/0 = 0
+5:7/0/texture_origin = Vector2i(0, -16)
+1:5/0 = 0
+1:5/0/texture_origin = Vector2i(0, -16)
+1:4/0 = 0
+1:4/0/texture_origin = Vector2i(0, -16)
+0:8/0 = 0
+0:8/0/texture_origin = Vector2i(0, -16)
+3:7/0 = 0
+3:7/0/texture_origin = Vector2i(0, -16)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -16)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pippe"]
+texture = ExtResource("5_1iyar")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = 3
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+0:1/0/custom_data_0 = 2
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asbr0"]
+texture = ExtResource("6_mb6ak")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+0:0/0/custom_data_0 = -1
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -8)
+0:1/0/custom_data_0 = -3
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+1:0/0/custom_data_0 = -2
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(64, 32)
+custom_data_layer_0/name = "Token"
+custom_data_layer_0/type = 2
+sources/5 = SubResource("TileSetAtlasSource_pippe")
+sources/6 = SubResource("TileSetAtlasSource_asbr0")
+sources/0 = SubResource("TileSetAtlasSource_wrmtx")
+sources/2 = SubResource("TileSetAtlasSource_byvwr")
+sources/1 = SubResource("TileSetAtlasSource_k7wba")
+sources/3 = SubResource("TileSetAtlasSource_hi7tm")
