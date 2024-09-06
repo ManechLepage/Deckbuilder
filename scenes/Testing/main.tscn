@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=52 format=4 uid="uid://c8q6x3pmng0nx"]
 
 [ext_resource type="Texture2D" uid="uid://cxram7f4ccl13" path="res://graphics/tiles/examples/ground.aseprite" id="1_ma1pn"]
 [ext_resource type="TileSet" uid="uid://dbqfwepwmpejf" path="res://graphics/tiles/tile_set.tres" id="3_sqwkf"]
@@ -27,16 +27,12 @@
 [ext_resource type="Script" path="res://scripts/UI/Combat/TopButton.gd" id="19_5vo3e"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/Phase.gd" id="19_ak35g"]
 [ext_resource type="Script" path="res://scripts/Obstacles/ObstacleManager.gd" id="19_u0o0i"]
-[ext_resource type="Script" path="res://scripts/Obstacles/Obstacle.gd" id="20_lwv0x"]
 [ext_resource type="Resource" uid="uid://br1b6psejuo83" path="res://resources/Cards/HomePoint.tres" id="20_tl8gv"]
-[ext_resource type="Resource" uid="uid://dj6e4n700iu1m" path="res://resources/Obstacles/Box.tres" id="21_2u2fn"]
 [ext_resource type="Script" path="res://scripts/Cards/card.gd" id="21_4gcxx"]
 [ext_resource type="Texture2D" uid="uid://b0imspfnxv1ii" path="res://graphics/energy/bar.aseprite" id="21_p3m75"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/EnergyBar.gd" id="21_si6xu"]
 [ext_resource type="Texture2D" uid="uid://b0l5bimdqfsxx" path="res://graphics/energy/energy_point.aseprite" id="22_gmerp"]
-[ext_resource type="Resource" uid="uid://c6pqsqcdawxg8" path="res://resources/Obstacles/Mountain.tres" id="22_rysou"]
 [ext_resource type="Resource" uid="uid://dgwgax7k48mw6" path="res://resources/Cards/Fight.tres" id="22_y3p1o"]
-[ext_resource type="Resource" uid="uid://bwtenc1val03i" path="res://resources/Obstacles/Pillar.tres" id="23_7dy3w"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/InfoLabel.gd" id="28_51rc0"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/DrawPile.gd" id="28_pa4gw"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/EnemyIntents.gd" id="29_hdoyd"]
@@ -144,6 +140,7 @@ z_index = 1
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("3_sqwkf")
+y_sort_origin = 1
 
 [node name="Cover1Indicator" type="TileMapLayer" parent="TileMap"]
 z_index = 2
@@ -188,7 +185,6 @@ script = ExtResource("11_d6jka")
 [node name="ObstacleManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("19_u0o0i")
-test_obstacles = Array[ExtResource("20_lwv0x")]([ExtResource("21_2u2fn"), ExtResource("22_rysou"), ExtResource("23_7dy3w")])
 
 [node name="Inventory" type="Node" parent="."]
 
