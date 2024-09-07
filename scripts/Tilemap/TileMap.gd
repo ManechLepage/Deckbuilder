@@ -1,5 +1,8 @@
 class_name TileManager
 extends Node2D
+
+@export_range(0, 1) var frequency: float
+
 @onready var ground: TileMapLayer = $Ground
 @onready var cover_1: TileMapLayer = $"Cover 1"
 @onready var ground_indicator: TileMapLayer = $GroundIndicator
@@ -8,6 +11,12 @@ extends Node2D
 
 var selected_token: Vector2i
 var restricted_tiles = [Vector2i(4, 0), Vector2i(5, 0)]
+
+var dark_grass = [Vector2i(11, 0), Vector2i(11, 1), Vector2i(11, 2)]
+var medium_grass = [Vector2i(9, 0), Vector2i(9, 1), Vector2i(9, 2)]
+var light_grass = [Vector2i(10, 0), Vector2i(10, 1), Vector2i(10, 2)]
+
+var grass_noise: FastNoiseLite
 
 func get_tile_from_mouse_position():
 	var position = ground.local_to_map(get_global_mouse_position())
@@ -37,6 +46,27 @@ func get_tile_content(position: Vector2i):
 		return tile_data.get_custom_data("Token")
 	else:
 		return null
+
+func place_tile(position: Vector2i, type: int):
+	var atlas_coord: Vector2i
+	var decoration: float = randf()
+	var decoration_type: int
+	
+	if decoration < 0.7:
+		decoration_type = 0
+	elif decoration < 0.85:
+		decoration_type = 1
+	else:
+		decoration_type = 2
+	
+	if type == 0:
+		atlas_coord = dark_grass[decoration_type]
+	elif type == 1:
+		atlas_coord = medium_grass[decoration_type]
+	else:
+		atlas_coord = light_grass[decoration_type]
+	
+	ground.set_cell(position + Vector2i(1, 1), 3, atlas_coord)
 
 func place_token(position: Vector2i, token: Token):
 	token.position = position
@@ -130,3 +160,34 @@ func get_obstacles(enemies=true):
 			filtered_obstacles.append(obstacle)
 	filtered_obstacles.append_array(water)
 	return filtered_obstacles
+
+func load_noise_tiles():
+	grass_noise = FastNoiseLite.new()
+	grass_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	grass_noise.frequency = frequency
+	grass_noise.seed = randi_range(1, 100_000)
+	
+	for tile in get_ground_tiles():
+		if has_ground(tile):
+			var noise_value = grass_noise.get_noise_2d(tile.x, tile.y)
+			if noise_value < -0.13:
+				place_tile(tile, 0)
+			elif noise_value < 0.08:
+				place_tile(tile, 1)
+			else:
+				place_tile(tile, 2)
+
+func _on_combat_start() -> void:
+	load_noise_tiles()
+
+func set_tile_decorations():
+	for tile in get_ground_tiles():
+		if has_ground(tile):
+			if not get_tile_content(tile):
+				var tile_atlas: Vector2i = ground.get_cell_atlas_coords(tile)
+				if tile_atlas in dark_grass:
+					place_tile(tile, 0)
+				elif tile_atlas in medium_grass:
+					place_tile(tile, 1)
+				else:
+					place_tile(tile, 2)

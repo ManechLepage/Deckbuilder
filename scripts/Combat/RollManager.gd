@@ -18,6 +18,7 @@ func roll():
 	roll_tokens()
 	roll_enemies()
 	roll_buildings()
+	tile_map.set_tile_decorations()
 	combat_manager.player_turn()
 
 func roll_tokens():

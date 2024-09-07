@@ -19,6 +19,9 @@ var target: Array
 var can_enemy_attack: bool
 var does_attack: bool
 
+var effects: Array[Effects.TYPE]
+var effect_quantity: Array[int]
+
 func heal(value: int):
 	health += value
 

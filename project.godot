@@ -25,6 +25,7 @@ aseprite_executable_path="C:/Program Files (x86)/Steam/steamapps/common/Aseprite
 TokenList="*res://scripts/Tokens/TokenList.gd"
 DamageType="*res://scripts/Combat/DamageType.gd"
 Description="*res://scripts/Cards/Description.gd"
+Effects="*res://scripts/Combat/Effects.gd"
 
 [display]
 

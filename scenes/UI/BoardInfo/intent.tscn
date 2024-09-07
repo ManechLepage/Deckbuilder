@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://datpadblhdkq7"]
+
+[ext_resource type="Script" path="res://scripts/UI/Combat/Intent.gd" id="1_6mi5u"]
+[ext_resource type="PackedScene" uid="uid://vu8c8d8plgc" path="res://scenes/UI/BoardInfo/icon.tscn" id="2_0i1tj"]
+[ext_resource type="Texture2D" uid="uid://4xoprg4chgl7" path="res://graphics/icons/passive.aseprite" id="2_go3u1"]
+[ext_resource type="Texture2D" uid="uid://3d1g031bkhxh" path="res://graphics/icons/attack.aseprite" id="3_chcgd"]
+[ext_resource type="Texture2D" uid="uid://d181bjtlvb6f" path="res://graphics/icons/no_intents.aseprite" id="4_xdsx1"]
+[ext_resource type="Texture2D" uid="uid://dw1wgo15mipjw" path="res://graphics/icons/poison.aseprite" id="6_mo7qr"]
+
+[node name="Intent" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.2, 0.2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_6mi5u")
+icon = ExtResource("2_0i1tj")
+passive_icon = ExtResource("2_go3u1")
+attack_icon = ExtResource("3_chcgd")
+no_intents_icon = ExtResource("4_xdsx1")
+poison_icon = ExtResource("6_mo7qr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.5
+offset_right = 127.5
+offset_bottom = 64.0
+grow_horizontal = 2
+alignment = 1
