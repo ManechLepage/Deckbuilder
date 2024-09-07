@@ -1,11 +1,13 @@
-extends Label
+extends TextureRect
 
 @onready var selection_manager = %SelectionManager
 
+@export var sprites: Array[Texture2D]
+
 func changed_action_type() -> void:
 	if selection_manager.current_selection_type == selection_manager.WaitingSelection.Token:
-		text = "Select a token"
+		texture = sprites[1]
 	elif selection_manager.current_selection_type == selection_manager.WaitingSelection.Tile:
-		text = "Select a tile"
+		texture = sprites[0]
 	else:
-		text = ""
+		texture = null

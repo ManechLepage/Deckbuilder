@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Obstacle" load_steps=2 format=3 uid="uid://bwtenc1val03i"]
-
-[ext_resource type="Script" path="res://scripts/Obstacles/Obstacle.gd" id="1_nnqt6"]
-
-[resource]
-script = ExtResource("1_nnqt6")
-sprite = Vector2i(1, 0)
-fixed = true
-destroyable = true

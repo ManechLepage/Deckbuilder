@@ -3,7 +3,7 @@ extends Node
 
 @onready var tile_map = %TileMap
 @onready var tokens = %Tokens
-@onready var info_label: Label = %InfoLabel
+@onready var info_label = %InfoLabel
 @onready var healths = %Healths
 @onready var enemy_manager = %EnemyManager
 @onready var selection_manager = %SelectionManager

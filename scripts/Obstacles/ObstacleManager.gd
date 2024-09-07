@@ -20,3 +20,7 @@ func get_obstacle_at_position(position: Vector2i):
 	for obstacle in obstacles:
 		if obstacle.position == position:
 			return obstacle
+
+func change_obstacle_sprites():
+	for obstacle in obstacles:
+		obstacle.sprite = obstacle.sprites.pick_random()

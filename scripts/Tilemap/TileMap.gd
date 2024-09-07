@@ -7,6 +7,7 @@ extends Node2D
 @onready var building_manager = %BuildingManager
 
 var selected_token: Vector2i
+var restricted_tiles = [Vector2i(4, 0), Vector2i(5, 0)]
 
 func get_tile_from_mouse_position():
 	var position = ground.local_to_map(get_global_mouse_position())
@@ -68,6 +69,13 @@ func place_selectable(position: Vector2i, sprite: Vector2i):
 func has_ground(position: Vector2i):
 	position = Vector2i(position.x + 1, position.y + 1)
 	if ground.get_cell_tile_data(position):
+		if has_water(position):
+			return false
+		return true
+	return false
+
+func has_water(position: Vector2i):
+	if ground.get_cell_atlas_coords(position) in restricted_tiles:
 		return true
 	return false
 
@@ -107,11 +115,18 @@ func get_obstacles(enemies=true):
 	var obstacles: Array[Vector2i]
 	obstacles.append_array(cover_1.get_used_cells())
 	
+	var water: Array[Vector2i]
+	for tile in ground.get_used_cells():
+		if has_water(tile):
+			water.append(tile)
+	
 	if enemies:
+		obstacles.append_array(water)
 		return obstacles
 	
 	var filtered_obstacles: Array[Vector2i]
 	for obstacle in obstacles:
 		if get_tile_content(obstacle) > -1:
 			filtered_obstacles.append(obstacle)
+	filtered_obstacles.append_array(water)
 	return filtered_obstacles

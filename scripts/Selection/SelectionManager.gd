@@ -51,12 +51,12 @@ signal changed_action_type
 	#print(is_in_hand)
 
 func _input(event):
-	#print(current_selection_type)
 	if Input.is_action_just_pressed("left_click"):
 		check_for_token()
 		check_for_tile()
 		check_for_card()
 		check_for_building()
+		#print("SELECTION TYPE: ", current_selection_type)
 	changed_action_type.emit()
 
 func check_for_token():
@@ -71,12 +71,13 @@ func check_for_token():
 				is_for_movement = true
 				if previous_token == selected_token:
 					is_for_movement = false
-					clear_selected_token()
 				else:
 					selectable_tiles = calculate_selectable_cells(selected_token.movement, tile_map.get_tile_from_mouse_position(), true)
 					update_selectable_tiles(selectable_tiles, Vector2i(0, 0))
 		tile_map.clear_cover_selections()
 		current_selection_type = WaitingSelection.Tile
+		if previous_token == selected_token:
+			clear_selected_token()
 
 func check_for_tile():
 	if current_selection_type == WaitingSelection.Tile or current_selection_type == WaitingSelection.TokenAndTile or current_selection_type == WaitingSelection.All:
@@ -141,6 +142,8 @@ func clear_selections():
 	tile_map.clear_ground_indicators()
 
 func clear_selected_token():
+	current_selection_type = WaitingSelection.None
+	changed_action_type.emit()
 	selected_token = null
 	selectable_tiles.clear()
 	tile_map.clear_ground_indicators()

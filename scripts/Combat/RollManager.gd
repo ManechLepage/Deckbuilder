@@ -34,6 +34,7 @@ func roll_buildings():
 		tile_map.place_building(building, get_random_position())
 
 func roll_obstacles():
+	obstacle_manager.change_obstacle_sprites()
 	for obstacle in obstacle_manager.obstacles:
 		if obstacle.fixed:
 			tile_map.place_obstacle(obstacle, obstacle.position)
@@ -47,6 +48,7 @@ func get_random_position():
 	while true:
 		var pos = Vector2i(randi_range(-6, 1), randi_range(-5, 2))
 		if pos not in used_tiles:
-			used_tiles.append(pos)
-			return pos
+			if tile_map.has_ground(pos):
+				used_tiles.append(pos)
+				return pos
 	return null

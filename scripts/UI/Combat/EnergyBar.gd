@@ -1,8 +1,8 @@
 extends Control
 
-@onready var texture_rect = $TextureRect
+@onready var texture_rect = $Bar/TextureRect
 @onready var label = $Label
-@onready var v_box_container = $VBoxContainer
+@onready var v_box_container = $Bar/VBoxContainer
 
 func set_value(value: int, max: int):
 	label.text = str(value) + "/" + str(max)
