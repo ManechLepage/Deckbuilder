@@ -184,7 +184,7 @@ func set_tile_decorations():
 	for tile in get_ground_tiles():
 		if has_ground(tile):
 			if not get_tile_content(tile):
-				var tile_atlas: Vector2i = ground.get_cell_atlas_coords(tile)
+				var tile_atlas: Vector2i = ground.get_cell_atlas_coords(tile + Vector2i(1, 1))
 				if tile_atlas in dark_grass:
 					place_tile(tile, 0)
 				elif tile_atlas in medium_grass:
