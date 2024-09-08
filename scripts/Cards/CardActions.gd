@@ -47,8 +47,9 @@ func select_open_tile():
 	selection_manager.current_tile_selection_type = selection_manager.TileSelectionType.Building
 	var tiles: Array[Vector2i]
 	for tile in tile_map.get_ground_tiles():
-		if tile_map.get_tile_content(tile) == null:
-			tiles.append(tile)
+		if tile_map.has_ground(tile):
+			if tile_map.get_tile_content(tile) == null:
+				tiles.append(tile)
 	selection_manager.update_selectable_tiles(tiles, Vector2i(0, 1))
 	await selected
 	return selection_manager.selected_tile
@@ -118,6 +119,14 @@ func explode(range: int, damage: Damage, position: Vector2i):
 	var tiles: Array[Vector2i] = get_tiles_from_range(range, position)
 	for tile in tiles:
 		combat_manager.deal_damage_to_tile(tile, damage)
+
+func direct_damage(damage: Damage, enemy: Enemy):
+	combat_manager.deal_damage_to_enemy(enemy, damage)
+
+func extra_damage_type(token: Token, damage_type: DamageType.TYPE):
+	token.attack.damage.types.append(damage_type)
+	selection_manager.attack_token(token)
+	token.attack.damage.types.erase(damage_type)
 
 
 func teleport_token(token: Token, new_position: Vector2i):

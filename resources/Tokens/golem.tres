@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Token" load_steps=8 format=3 uid="uid://blsyf1h8wkujm"]
+
+[ext_resource type="Resource" uid="uid://cbud8xsm74ic0" path="res://resources/Movements/Range1.tres" id="1_b1fcd"]
+[ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="1_c0day"]
+[ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="1_wkj5k"]
+[ext_resource type="Script" path="res://scripts/Combat/Attack.gd" id="2_gep7y"]
+[ext_resource type="Resource" uid="uid://cd1prjupo520" path="res://resources/Movements/Range2.tres" id="3_t7gtd"]
+
+[sub_resource type="Resource" id="Resource_vjed2"]
+script = ExtResource("1_wkj5k")
+value = 5
+types = Array[int]([0])
+piercing = false
+
+[sub_resource type="Resource" id="Resource_usgxj"]
+script = ExtResource("2_gep7y")
+area = ExtResource("1_b1fcd")
+choose = false
+damage = SubResource("Resource_vjed2")
+
+[resource]
+script = ExtResource("1_c0day")
+id = 101
+name = &"Stone Golem"
+sprite = Vector2i(3, 0)
+health = 40
+movement = ExtResource("3_t7gtd")
+attack = SubResource("Resource_usgxj")

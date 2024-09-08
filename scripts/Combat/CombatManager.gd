@@ -42,6 +42,7 @@ func place():
 		cards.start_combat()
 		building_manager.buildings.clear()
 
+
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("left_click"):
 		if current_combat_phase == CombatPhase.EnemyTurn:
@@ -62,6 +63,7 @@ func handle_click_in_placing_tokens():
 func handle_click_in_enemy_turn():
 	if enemy_manager.finished:
 		place()
+
 
 func update_tokens():
 	for token in tokens.combat_tokens:
@@ -88,6 +90,7 @@ func update_obstacles():
 	for obstacle in obstacle_manager.obstacles:
 		pass
 
+
 func player_turn():
 	current_combat_phase = CombatPhase.PlayerTurn
 	phase.update_label()
@@ -103,6 +106,7 @@ func player_turn():
 	
 	cards.discard_hand()
 	cards.draw(5)
+
 
 func attack(token: Token, target: Vector2i):
 	#print("ATTACK: ", token.name, "/", target)
@@ -125,6 +129,7 @@ func attack(token: Token, target: Vector2i):
 		for tile in token.attack.area.relative_positions:
 			deal_damage_to_tile(token.position + tile, token.attack.damage)
 
+
 func deal_damage_to_tile(tile: Vector2i, damage: Damage):
 	var content = tile_map.get_tile_content(tile)
 	if content:
@@ -142,7 +147,9 @@ func deal_damage_to_tile(tile: Vector2i, damage: Damage):
 
 func deal_damage_to_enemy(enemy: Enemy, damage: Damage):
 	#print("HIT")
+	damage = apply_previous_effects(enemy, damage)
 	enemy.health -= damage.value
+	apply_effects_from_attack(enemy, damage)
 	if enemy.health < 1:
 		enemy_manager.remove_enemy(enemy)
 
@@ -159,6 +166,23 @@ func deal_damage_to_token(token: Token, damage: Damage):
 func deal_damage_to_obstacle(obstacle: Obstacle, damage: Damage):
 	if damage.value > 0 and obstacle.destroyable:
 		obstacle_manager.remove_obstacle(obstacle)
+
+
+func apply_previous_effects(enemy: Enemy, damage: Damage):
+	if not damage.types.has(DamageType.TYPE.POISON):
+		if enemy.effects.has(Effects.TYPE.POISON):
+			damage.value *= 1.5
+			enemy.remove_effect(Effects.TYPE.POISON, 1)
+			if not enemy.effects.has(Effects.TYPE.POISON):
+				enemy_manager.lost_poison_effect.emit()
+	return damage
+
+func apply_effects_from_attack(enemy: Enemy, damage: Damage):
+	for damage_type in damage.types:
+		if damage_type == DamageType.TYPE.POISON:
+			print("----")
+			enemy.add_effect(Effects.TYPE.POISON, 1)
+
 
 func update_placing_label():
 	info_label.text = "Placing " + tokens.combat_tokens[tokens_left].name + "..."

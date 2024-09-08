@@ -22,6 +22,21 @@ var does_attack: bool
 var effects: Array[Effects.TYPE]
 var effect_quantity: Array[int]
 
+func add_effect(effect: Effects.TYPE, quantity: int):
+	if not effects.has(effect):
+		effects.append(effect)
+		effect_quantity.append(quantity)
+	else:
+		effect_quantity[effects.find(effect)] += quantity
+
+func remove_effect(effect: Effects.TYPE, quantity: int):
+	if effects.has(effect):
+		var index = effects.find(effect)
+		effect_quantity[index] -= quantity
+		if effect_quantity[index] < 1:
+			effects.remove_at(index)
+			effect_quantity.remove_at(index)
+
 func heal(value: int):
 	health += value
 

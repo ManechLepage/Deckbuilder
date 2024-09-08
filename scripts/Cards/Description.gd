@@ -12,6 +12,6 @@ var keywords = {
 }
 
 func enrich(text: String):
-	for keyword in keywords.keys():
-		text = text.replacen(keyword, keywords[keyword])
+	#for keyword in keywords.keys():
+		#text = text.replacen(keyword, keywords[keyword])
 	return text

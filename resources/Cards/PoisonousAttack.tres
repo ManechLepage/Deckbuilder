@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=3 format=3 uid="uid://dlcf2s33h4y7b"]
+
+[ext_resource type="Script" path="res://scripts/Cards/spell.gd" id="1_uniwa"]
+[ext_resource type="Texture2D" uid="uid://di22p3i2o1o8q" path="res://graphics/cards/backgrounds/lost_ruins.aseprite" id="2_30g6v"]
+
+[resource]
+script = ExtResource("1_uniwa")
+name = &"Poisonous Attack"
+cost = 1
+sprite = ExtResource("2_30g6v")
+description = "Target token attacks. It does poison damage in addition to it's damage type."

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Token" load_steps=7 format=3 uid="uid://dj3j3phwtg3sr"]
+
+[ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="1_3vlxr"]
+[ext_resource type="Resource" uid="uid://cq3662v7205c1" path="res://resources/Movements/DirectionalCross.tres" id="1_c8q8b"]
+[ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="2_degkr"]
+[ext_resource type="Script" path="res://scripts/Combat/Attack.gd" id="3_6kk8w"]
+
+[sub_resource type="Resource" id="Resource_tk1ti"]
+script = ExtResource("2_degkr")
+value = 3
+types = Array[int]([2])
+piercing = false
+
+[sub_resource type="Resource" id="Resource_b5rtt"]
+script = ExtResource("3_6kk8w")
+area = ExtResource("1_c8q8b")
+choose = true
+damage = SubResource("Resource_tk1ti")
+
+[resource]
+script = ExtResource("1_3vlxr")
+id = 100
+name = &"Frog Ranger"
+sprite = Vector2i(2, 0)
+health = 10
+movement = ExtResource("1_c8q8b")
+attack = SubResource("Resource_b5rtt")

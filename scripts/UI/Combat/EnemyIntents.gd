@@ -17,4 +17,3 @@ func update_intents():
 		intent.position = tile_map.cover_1.map_to_local(enemy.position) + offset
 		intent.update(enemy)
 		add_child(intent)
-		print(intent.name)

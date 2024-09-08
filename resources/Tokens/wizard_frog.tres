@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Token" load_steps=8 format=3 uid="uid://r0n2s1gdbwr4"]
+
+[ext_resource type="Script" path="res://scripts/Tokens/Token.gd" id="1_pt65w"]
+[ext_resource type="Resource" uid="uid://jx6wlytl76h" path="res://resources/Movements/Range3.tres" id="1_rsmp8"]
+[ext_resource type="Resource" uid="uid://cq3662v7205c1" path="res://resources/Movements/DirectionalCross.tres" id="1_wiese"]
+[ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="2_tknat"]
+[ext_resource type="Script" path="res://scripts/Combat/Attack.gd" id="3_rodng"]
+
+[sub_resource type="Resource" id="Resource_abgjc"]
+script = ExtResource("2_tknat")
+value = 4
+types = Array[int]([2, 1])
+piercing = false
+
+[sub_resource type="Resource" id="Resource_c81vq"]
+script = ExtResource("3_rodng")
+area = ExtResource("1_wiese")
+choose = true
+damage = SubResource("Resource_abgjc")
+
+[resource]
+script = ExtResource("1_pt65w")
+id = 102
+name = &"Frog Wizard"
+sprite = Vector2i(2, 1)
+health = 20
+movement = ExtResource("1_rsmp8")
+attack = SubResource("Resource_c81vq")

@@ -105,7 +105,8 @@ func check_for_building():
 	var tile = tile_map.get_tile_from_mouse_position()
 	for building: Building in building_manager.buildings:
 		if building.position == tile:
-			building_manager.activate_ability(building)
+			if building.can_use_ability():
+				building_manager.activate_ability(building)
 
 func token_selectable(selectable_tokens: Array[Token]):
 	clear_selections()

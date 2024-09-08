@@ -10,6 +10,8 @@ var enemies: Array[Enemy]
 
 var finished = false
 
+signal lost_poison_effect(enemy: Enemy)
+
 func _on_combat_manager_placing_tokens():
 	for enemy in testing_enemies:
 		enemies.append(enemy.duplicate())

@@ -16,8 +16,9 @@ var enemy: Enemy
 
 func update(_enemy: Enemy):
 	enemy = _enemy
-	enemy.effects.append(Effects.TYPE.POISON)
-	enemy.effect_quantity.append(1)
+	
+	load_intent()
+	load_effects()
 
 
 func get_intent_texture():

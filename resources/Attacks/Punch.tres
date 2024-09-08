@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://db7q4un0eem34"]
 
-[ext_resource type="Resource" uid="uid://cbud8xsm74ic0" path="res://resources/Movements/Close.tres" id="1_rgeo4"]
+[ext_resource type="Resource" uid="uid://cbud8xsm74ic0" path="res://resources/Movements/Range1.tres" id="1_rgeo4"]
 [ext_resource type="Script" path="res://scripts/Combat/Attack.gd" id="1_u4c0b"]
 [ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="2_8vgd1"]
 

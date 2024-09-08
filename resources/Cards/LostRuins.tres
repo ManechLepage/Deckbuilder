@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://7gp1pye1xgqm"]
+
+[ext_resource type="Script" path="res://scripts/Buildings/Building.gd" id="1_u5wre"]
+[ext_resource type="Texture2D" uid="uid://di22p3i2o1o8q" path="res://graphics/cards/backgrounds/lost_ruins.aseprite" id="2_1yv3l"]
+
+[resource]
+script = ExtResource("1_u5wre")
+health = 2
+building_sprite = Vector2i(0, 0)
+ability_usage_per_turn = 0
+name = &"Lost Ruins"
+cost = 1
+sprite = ExtResource("2_1yv3l")
+description = "When an enemy loses the poison effect, it takes 2 arcana damage."

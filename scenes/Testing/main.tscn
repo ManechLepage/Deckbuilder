@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://c8q6x3pmng0nx"]
+[gd_scene load_steps=68 format=4 uid="uid://c8q6x3pmng0nx"]
 
 [ext_resource type="Texture2D" uid="uid://cxram7f4ccl13" path="res://graphics/tiles/examples/ground.aseprite" id="1_ma1pn"]
 [ext_resource type="TileSet" uid="uid://dbqfwepwmpejf" path="res://graphics/tiles/tile_set.tres" id="3_sqwkf"]
@@ -7,11 +7,8 @@
 [ext_resource type="Script" path="res://scripts/UI/Combat/StartBattleButton.gd" id="5_ja3ef"]
 [ext_resource type="Script" path="res://scripts/Tokens/TokenInventory.gd" id="5_v462x"]
 [ext_resource type="Script" path="res://scripts/Enemies/EnemyManager.gd" id="7_044s7"]
-[ext_resource type="Resource" uid="uid://083sj6g4ytev" path="res://resources/Tokens/big.tres" id="7_ije6g"]
 [ext_resource type="Resource" uid="uid://dkgfls00lg17p" path="res://resources/Enemies/Basic.tres" id="8_nbnuu"]
-[ext_resource type="Resource" uid="uid://rsp48jmlwixu" path="res://resources/Tokens/medium.tres" id="8_v6kqr"]
 [ext_resource type="Script" path="res://scripts/Selection/SelectionManager.gd" id="9_d3y2r"]
-[ext_resource type="Resource" uid="uid://da1pt6fugk8se" path="res://resources/Tokens/small.tres" id="9_joyem"]
 [ext_resource type="Script" path="res://scripts/Combat/RollManager.gd" id="10_biw57"]
 [ext_resource type="Script" path="res://scripts/Buildings/BuildingManager.gd" id="10_bp4um"]
 [ext_resource type="Script" path="res://scripts/Enemies/Enemy.gd" id="10_ng17c"]
@@ -30,14 +27,17 @@
 [ext_resource type="Script" path="res://scripts/UI/Combat/Phase.gd" id="19_ak35g"]
 [ext_resource type="Script" path="res://scripts/Obstacles/ObstacleManager.gd" id="19_u0o0i"]
 [ext_resource type="Resource" uid="uid://ce8xi42kmnkav" path="res://resources/Obstacles/Bush.tres" id="19_xfa4u"]
-[ext_resource type="Resource" uid="uid://br1b6psejuo83" path="res://resources/Cards/HomePoint.tres" id="20_tl8gv"]
 [ext_resource type="Script" path="res://scripts/Cards/card.gd" id="21_4gcxx"]
 [ext_resource type="Texture2D" uid="uid://b0imspfnxv1ii" path="res://graphics/energy/bar.aseprite" id="21_p3m75"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/EnergyBar.gd" id="21_si6xu"]
+[ext_resource type="Resource" uid="uid://blsyf1h8wkujm" path="res://resources/Tokens/golem.tres" id="22_fheox"]
 [ext_resource type="Texture2D" uid="uid://b0l5bimdqfsxx" path="res://graphics/energy/energy_point.aseprite" id="22_gmerp"]
-[ext_resource type="Resource" uid="uid://dgwgax7k48mw6" path="res://resources/Cards/Fight.tres" id="22_y3p1o"]
+[ext_resource type="Resource" uid="uid://r0n2s1gdbwr4" path="res://resources/Tokens/wizard_frog.tres" id="23_k4e2s"]
+[ext_resource type="Resource" uid="uid://dj3j3phwtg3sr" path="res://resources/Tokens/range_frog.tres" id="24_h45la"]
+[ext_resource type="Resource" uid="uid://dlcf2s33h4y7b" path="res://resources/Cards/PoisonousAttack.tres" id="28_4rm5o"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/InfoLabel.gd" id="28_51rc0"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/DrawPile.gd" id="28_pa4gw"]
+[ext_resource type="Resource" uid="uid://7gp1pye1xgqm" path="res://resources/Cards/LostRuins.tres" id="28_xhnfc"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/EnemyIntents.gd" id="29_hdoyd"]
 [ext_resource type="Script" path="res://scripts/UI/Combat/Discard.gd" id="30_bh0kq"]
 [ext_resource type="Texture2D" uid="uid://wgk7p7hdeg1x" path="res://graphics/cards/deck.aseprite" id="31_juuhc"]
@@ -62,6 +62,15 @@
 [ext_resource type="Script" path="res://scripts/Cards/CustomActions/HomePoint.gd" id="42_wfycr"]
 [ext_resource type="Texture2D" uid="uid://dj2bhu0dfwp8v" path="res://graphics/UI/Labels/TopCenter/Tile.aseprite" id="45_au84u"]
 [ext_resource type="Texture2D" uid="uid://b4ypuwc3vkat3" path="res://graphics/UI/Labels/TopCenter/Token.aseprite" id="46_eph36"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/LostRuins.gd" id="63_tf61b"]
+[ext_resource type="Script" path="res://scripts/Combat/Damage.gd" id="64_4kxfr"]
+[ext_resource type="Script" path="res://scripts/Cards/CustomActions/PoisonousAttack.gd" id="65_5j6qt"]
+
+[sub_resource type="Resource" id="Resource_1lbj6"]
+script = ExtResource("64_4kxfr")
+value = 2
+types = Array[int]([1])
+piercing = false
 
 [sub_resource type="Environment" id="Environment_5nuwv"]
 
@@ -206,12 +215,12 @@ test_obstacles = Array[ExtResource("17_6anfj")]([ExtResource("18_vtg7c"), ExtRes
 [node name="Tokens" type="Node" parent="Inventory"]
 unique_name_in_owner = true
 script = ExtResource("5_v462x")
-tokens = Array[ExtResource("16_wv05o")]([ExtResource("7_ije6g"), ExtResource("8_v6kqr"), ExtResource("9_joyem"), ExtResource("7_ije6g")])
+tokens = Array[ExtResource("16_wv05o")]([ExtResource("22_fheox"), ExtResource("23_k4e2s"), ExtResource("24_h45la")])
 
 [node name="Cards" type="Node" parent="Inventory"]
 unique_name_in_owner = true
 script = ExtResource("16_3ncu0")
-testing_deck = Array[ExtResource("21_4gcxx")]([ExtResource("22_y3p1o"), ExtResource("22_y3p1o"), ExtResource("22_y3p1o"), ExtResource("20_tl8gv"), ExtResource("20_tl8gv"), ExtResource("20_tl8gv")])
+testing_deck = Array[ExtResource("21_4gcxx")]([ExtResource("28_xhnfc"), ExtResource("28_xhnfc"), ExtResource("28_xhnfc"), ExtResource("28_4rm5o"), ExtResource("28_4rm5o"), ExtResource("28_4rm5o")])
 
 [node name="Healths" type="Control" parent="."]
 unique_name_in_owner = true
@@ -225,7 +234,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("13_7sb8f")
 health_label = ExtResource("13_ixdpm")
-offset = Vector2(-5, 15)
+offset = Vector2(-5, 40)
 
 [node name="EnemyIntents" type="Control" parent="."]
 unique_name_in_owner = true
@@ -239,7 +248,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("29_hdoyd")
-offset = Vector2(-5, 5)
+offset = Vector2(0, 23)
 intent_control = ExtResource("33_4d7ky")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." groups=["Canvas"]]
@@ -526,6 +535,15 @@ card_name = &"Military Camp"
 script = ExtResource("42_wfycr")
 card_name = &"Home Point"
 
+[node name="LostRuins" type="Node" parent="CardActions"]
+script = ExtResource("63_tf61b")
+damage = SubResource("Resource_1lbj6")
+card_name = &"Lost Ruins"
+
+[node name="PoisonousAttack" type="Node" parent="CardActions"]
+script = ExtResource("65_5j6qt")
+card_name = &"Poisonous Attack"
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5nuwv")
 
@@ -536,6 +554,7 @@ environment = SubResource("Environment_5nuwv")
 [connection signal="start_player_turn" from="CombatManager" to="BuildingManager" method="start_player_turn"]
 [connection signal="start_player_turn" from="CombatManager" to="CanvasLayer/Control/BottomButton" method="_on_combat_manager_start_player_turn"]
 [connection signal="changed_action_type" from="SelectionManager" to="CanvasLayer/InfoLabel" method="changed_action_type"]
+[connection signal="lost_poison_effect" from="EnemyManager" to="CardActions/LostRuins" method="lost_poison_effect"]
 [connection signal="pressed" from="CanvasLayer/Control/BottomButton" to="CanvasLayer/Control/BottomButton" method="_on_pressed"]
 [connection signal="attacked" from="CanvasLayer/TopButton" to="SelectionManager" method="top_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TopButton" to="CanvasLayer/TopButton" method="_on_pressed"]
